@@ -607,4 +607,5 @@ h1 { margin:0; line-height:1.42; gap:calc(var(--invitation-width) * .045); }
 .compact-rsvp .button { font-family:Arial,sans-serif; font-size:var(--rsvp-font); min-height:28px; }
 .desktop-panel { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,'Noto Sans',sans-serif; }
 .desktop-panel-tabs button { font-size:15px; font-weight:600; }
+.invitation-page>section { overflow-x:clip; }
 @media(prefers-reduced-motion:reduce) { html { scroll-behavior:auto; } *,*:before,*:after { animation:none!important; transition:none!important; } }

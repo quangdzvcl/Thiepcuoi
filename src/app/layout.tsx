@@ -3,8 +3,8 @@ import localFont from 'next/font/local';
 import { wedding } from '@/config/wedding';
 import './globals.css';
 const weddingScript = localFont({
-  src: '../../public/fonts/dancing-script.woff',
-  weight: '400 700',
+  src: '../../public/fonts/ephesis.woff',
+  weight: '400',
   variable: '--font-wedding-script',
   display: 'swap',
   fallback: ['cursive'],

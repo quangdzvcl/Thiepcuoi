@@ -1,7 +1,7 @@
 export default function RibbonBow({ className = '' }: { className?: string }) {
   return <svg className={`ribbon-bow ${className}`} viewBox="0 0 180 106" fill="none" aria-hidden="true">
-    <path d="M88 44C66 17 36 3 29 20C20 44 63 55 87 45ZM92 44C114 17 144 3 151 20C160 44 117 55 93 45Z" stroke="currentColor" strokeWidth="3" strokeLinecap="round" />
-    <path d="M86 47C76 60 69 76 58 97L78 88L84 101C88 79 91 62 91 48M96 47C106 63 116 77 130 94L109 88L105 102C101 79 96 62 91 48" stroke="currentColor" strokeWidth="2" strokeLinejoin="round" />
-    <path d="M84 42C87 37 96 38 99 43L97 50L86 51Z" fill="currentColor" />
+    <path d="M89 42C71 23 47 6 34 14C16 26 43 48 87 43C66 32 42 18 32 20M92 42C111 23 137 6 149 16C165 30 136 48 94 43C117 31 140 19 149 22" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
+    <path d="M88 46C87 59 65 66 68 80C70 91 82 91 77 102M94 46C96 65 116 67 114 80C112 90 101 94 108 103" stroke="currentColor" strokeWidth="3" strokeLinecap="round" />
+    <path d="M84 41C88 37 96 38 99 42L97 48L87 49Z" fill="currentColor" />
   </svg>;
 }

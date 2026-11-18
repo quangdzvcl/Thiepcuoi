@@ -155,3 +155,6 @@ Các số đo và khác biệt theo dữ liệu được ghi trong `docs/referen
 Nhạc nền: A Kind Of Hope — Scott Buckley, CC BY 4.0, nguồn https://www.scottbuckley.com.au/library/a-kind-of-hope/. Bản đầy đủ được nén lại ở 112 kbps để tải trên điện thoại; thông tin tại `public/music/ATTRIBUTION.txt`. Nhạc bắt đầu sau thao tác mở thiệp, lặp lại, nút nhạc hỗ trợ tạm dừng/tiếp tục. Giữ ghi nguồn khi thay đổi bố cục.
 
 Thẻ RSVP ngoài trang giữ bố cục ngắn như mẫu; khi tiếp tục sẽ mở form đầy đủ số điện thoại, bên gia đình, số khách và lời chúc. Bảng bên phải trên máy tính có tab QR cho chính link đang mở, không phụ thuộc dịch vụ tạo QR bên ngoài. RSVP vẫn theo cấu hình lưu dữ liệu trong `.env.local`; chế độ demo thông báo rõ chưa lưu.
+
+
+Tự cuộn đã đối chiếu bằng hai lần đo khi không thao tác trên mẫu: 447,2px trong 7,459 giây, xấp xỉ 60px/giây. Thiệp tự cuộn sau khi mở, dừng khi khách kéo trang, chạm/nhập form, dùng bàn phím hoặc chuyển tới tiện ích. Nút tiếp tục ở góc trái có thể bật lại; tự dừng cuối trang và khi thiết bị bật giảm chuyển động.

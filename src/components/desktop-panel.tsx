@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { MessageCircleHeart, Send } from 'lucide-react';
 import { wedding } from '@/config/wedding';
 
-export default function DesktopPanel() {
+export default function DesktopPanel({ onInteract }: { onInteract: () => void }) {
   const [tab, setTab] = useState<'wishes' | 'qr'>('wishes');
   const [qr, setQr] = useState('');
   useEffect(() => {
@@ -13,7 +13,7 @@ export default function DesktopPanel() {
     import('qrcode').then(module => module.default.toDataURL(`${window.location.origin}/`, { width: 240, margin: 2, errorCorrectionLevel: 'M' })).then(value => { if (active) setQr(value); }).catch(() => { if (active) setQr(''); });
     return () => { active = false; };
   }, [tab]);
-  return <aside className="desktop-panel" aria-label="Lời chúc và xem thiệp trên điện thoại">
+  return <aside className="desktop-panel" aria-label="Lời chúc và xem thiệp trên điện thoại" onClickCapture={onInteract}>
     <div className="desktop-panel-tabs" role="tablist" aria-label="Thông tin thiệp">
       <button role="tab" id="wishes-tab" aria-controls="wishes-panel" aria-selected={tab === 'wishes'} onClick={() => setTab('wishes')}>Lời chúc</button>
       <button role="tab" id="qr-tab" aria-controls="qr-panel" aria-selected={tab === 'qr'} onClick={() => setTab('qr')}>Xem trên điện thoại</button>

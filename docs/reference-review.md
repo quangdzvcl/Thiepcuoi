@@ -61,3 +61,6 @@ Bìa có vòng cung đúng tỷ lệ, chữ WEDDING và nơ thật của mẫu. 
 ## Kiểm tra
 
 Đã kiểm tra mở/đóng ảnh, đổi ảnh, mở/đóng hộp mừng cưới, bước RSVP giữ tên và lựa chọn tham dự, tự vô hiệu số khách khi chọn không tham dự, mở QR trên máy tính, phát/tắt/tiếp tục nhạc (342.6 giây), build và TypeScript. Đã sửa Chủ Nhật không xuống dòng, căn giữa số đếm ngược và đối chiếu font Arial của thẻ RSVP. Các liên kết bản đồ và giờ tiệc giữ theo cấu hình đã xác nhận.
+
+
+Tự cuộn đã đối chiếu bằng hai lần đo khi không thao tác trên mẫu: 447,2px trong 7,459 giây, xấp xỉ 60px/giây. Thiệp tự cuộn sau khi mở, dừng khi khách kéo trang, chạm/nhập form, dùng bàn phím hoặc chuyển tới tiện ích. Nút tiếp tục ở góc trái có thể bật lại; tự dừng cuối trang và khi thiết bị bật giảm chuyển động.

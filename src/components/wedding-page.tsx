@@ -12,6 +12,7 @@ import Envelope from './envelope';
 import RibbonBow from './ribbon-bow';
 import OpeningHearts from './opening-hearts';
 import DesktopPanel from './desktop-panel';
+import { useAutoScroll } from './use-auto-scroll';
 
 function calendarLink(event: typeof w.events[number]) {
   const compact = (date: string) => new Date(date).toISOString().replace(/[-:]/g, '').replace(/\.\d{3}/, '');
@@ -60,6 +61,8 @@ export default function WeddingPage() {
   const [giftsOpen, setGiftsOpen] = useState(false);
   const [toast, setToast] = useState('');
   const audio = useRef<HTMLAudioElement>(null);
+  const main = useRef<HTMLElement>(null);
+  const reading = useAutoScroll(main, opened);
   useEffect(() => { if (opened) document.getElementById('main-content')?.focus({ preventScroll: true }); }, [opened]);
   useEffect(() => { if (!toast) return; const timer = setTimeout(() => setToast(''), 5000); return () => clearTimeout(timer); }, [toast]);
   async function play() {
@@ -75,10 +78,11 @@ export default function WeddingPage() {
     } catch (error) { if (!(error instanceof DOMException && error.name === 'AbortError')) setToast(`Đường dẫn thiệp: ${url}`); }
   }
   return <MotionConfig reducedMotion="user">
-    <RevealProvider active={opened}><div className="wedding-shell" inert={!opened} aria-hidden={!opened}>
+    <RevealProvider active={opened}><div className={`wedding-shell${reading.active ? ' auto-reading' : ''}`} inert={!opened} aria-hidden={!opened}>
       <a className="skip-link" href="#main-content">Đến nội dung chính</a>
-      <DesktopPanel />
-      <main className="invitation-page" id="main-content" tabIndex={-1}>
+      <DesktopPanel onInteract={reading.pause} />
+      <main ref={main} className="invitation-page" id="main-content" tabIndex={-1} onWheelCapture={reading.pause} onTouchStartCapture={reading.pause} onKeyDown={event => { if (['ArrowUp', 'ArrowDown', 'PageUp', 'PageDown', 'Home', 'End', ' '].includes(event.key)) reading.pause(); }} onFocusCapture={event => { if ((event.target as HTMLElement).closest('button,a,input,select,textarea,label')) reading.pause(); }} onClickCapture={event => { if ((event.target as HTMLElement).closest('button,a,input,select,textarea,label')) reading.pause(); }}>
+
         <section className="wedding-cover" id="top" aria-labelledby="couple-title">
           <div className="cover-photo"><motion.img initial={{ scale: 1.31 }} animate={{ scale: opened ? 1.25 : 1.31 }} transition={{ duration: 2.4, ease: [0.22, 1, 0.36, 1] }} src={w.hero} alt={`Ảnh cưới vest trắng của ${w.groom} và ${w.bride}`} width={2000} height={2999} fetchPriority="high" /><span className="cover-photo-label"><span className="script">Save the date</span>{w.dateLabel}</span></div>
           <div className="cover-copy"><Reveal effect="zoom" delay={0.1}><RibbonBow /></Reveal><Reveal effect="fade" delay={0.25}><img className="cover-overline" src="/images/decorations/wedding-title.png" alt="WEDDING" width={312} height={88} /></Reveal><Reveal effect="rise" delay={0.4}><h1 id="couple-title"><span>{w.groom}</span><i>–</i><span>{w.bride}</span></h1></Reveal><Reveal effect="fade" delay={0.65}><p className="script invitation-line">Trân trọng kính mời</p></Reveal><p className="cover-message">Tham dự bữa cơm thân mật<br />chung vui cùng gia đình vào lúc</p><div className="cover-dates">{w.events.map((event, i) => <a key={event.title} href={`#event-${i}`}><span>{event.subtitle} · {event.time}</span><strong>{event.start.slice(0, 10).split('-').reverse().join('.')}</strong><small>{event.lunarDay.replace('Nhằm ngày ', '')}</small></a>)}</div></div>
@@ -101,7 +105,8 @@ export default function WeddingPage() {
         <footer className="wedding-footer"><img className="footer-photo" src={w.footer} alt={`${w.groom} và ${w.bride} cùng nâng khăn voan trắng`} width={1400} height={2100} loading="lazy" /><img className="footer-thanks" src="/images/decorations/thanks-title.png" alt="THANKS" width={312} height={87} loading="lazy" /></footer>
         <p className="music-credit">Nhạc: <a href={w.musicCredit.url} target="_blank" rel="noreferrer">{w.musicCredit.title} — {w.musicCredit.artist}</a> · <a href={w.musicCredit.licenseUrl} target="_blank" rel="noreferrer">CC BY 4.0</a></p>
       </main>
-      <div className="card-scroll-controls"><button aria-label="Cuộn thiệp lên" onClick={() => document.getElementById('main-content')?.scrollBy({ top: -500, behavior: 'smooth' })}><ArrowUp size={20} /></button><button aria-label="Cuộn thiệp xuống" onClick={() => document.getElementById('main-content')?.scrollBy({ top: 500, behavior: 'smooth' })}><ArrowDown size={20} /></button></div><nav className="quick-actions" aria-label="Tiện ích thiệp cưới"><a href="#rsvp"><MessageCircleHeart size={20} /><span>Gửi lời chúc…</span></a><a href="#gallery"><Images size={20} /><span>Album</span></a><button onClick={() => setGiftsOpen(true)}><Gift size={20} /><span>Mừng cưới</span></button><button onClick={() => void share()}><Share2 size={20} /><span>Chia sẻ</span></button></nav>
+      <div className="card-scroll-controls"><button aria-label="Cuộn thiệp lên" onClick={() => { reading.pause(); main.current?.scrollBy({ top: -500, behavior: 'smooth' }); }}><ArrowUp size={20} /></button><button aria-label="Cuộn thiệp xuống" onClick={() => { reading.pause(); main.current?.scrollBy({ top: 500, behavior: 'smooth' }); }}><ArrowDown size={20} /></button></div><nav className="quick-actions" onClickCapture={reading.pause} aria-label="Tiện ích thiệp cưới"><a href="#rsvp"><MessageCircleHeart size={20} /><span>Gửi lời chúc…</span></a><a href="#gallery"><Images size={20} /><span>Album</span></a><button onClick={() => setGiftsOpen(true)}><Gift size={20} /><span>Mừng cưới</span></button><button onClick={() => void share()}><Share2 size={20} /><span>Chia sẻ</span></button></nav>
+      {opened && !reading.reduced && <button className={`auto-scroll-button${reading.active ? ' is-running' : ''}`} aria-label={reading.active ? 'Tạm dừng tự cuộn' : 'Tiếp tục tự cuộn'} onClick={reading.active ? reading.pause : reading.resume}><img src="/images/decorations/auto-scroll-play.png" alt="" width={40} height={40} /></button>}
       <button className={`music-button${playing ? ' playing' : ''}`} aria-label={!w.music ? 'Chưa có nhạc nền' : playing ? 'Tắt nhạc nền' : 'Bật nhạc nền'} aria-pressed={playing} disabled={!w.music} onClick={() => { if (playing) { audio.current?.pause(); setPlaying(false); } else void play(); }}><img src="/images/decorations/music-icon.png" alt="" width={24} height={24} />{!playing && <span className="music-muted-line" aria-hidden="true" />}</button>
       {toast && <p className="toast-message" role="status">{toast}</p>}
     </div></RevealProvider>

@@ -41,22 +41,22 @@ p { color:var(--muted); }
 
 /* The opening envelope is drawn in CSS, with a real photo inside. */
 .envelope-screen { position:fixed; inset:0; z-index:100; display:flex; flex-direction:column; justify-content:center; align-items:center; background:#fff; padding:30px 20px; }
-.envelope-kicker { color:#9b8780; font-size:8px; letter-spacing:3px; text-align:center; margin:0 0 36px; }
-.envelope-prompt { font-family:var(--font-wedding-script),cursive; font-size:29px; color:var(--wine); margin:0 0 22px; }
-.envelope-button { width:226px; height:152px; padding:0; position:relative; background:none; perspective:900px; isolation:isolate; transition:transform .35s; }
+.envelope-stage { --envelope-width:min(60vw,31.5dvh); position:relative; display:flex; flex-direction:column; align-items:center; gap:40px; }
+.envelope-prompt { font-family:var(--font-wedding-script),cursive; font-size:27.8px; line-height:20px; white-space:nowrap; color:var(--wine); margin:0; }
+.envelope-button { width:var(--envelope-width); height:auto; aspect-ratio:3/2; flex-shrink:0; padding:0; position:relative; background:none; perspective:900px; isolation:isolate; transition:transform .35s; }
 .envelope-button:focus-visible { outline:2px solid #d7b8b3; outline-offset:9px; border-radius:3px; }
 .envelope-button:hover { transform:translateY(-4px); }
 .envelope-button:disabled { opacity:1; }
 .envelope-back,.envelope-front,.envelope-flap { position:absolute; inset:0; display:block; }
 .envelope-back { background:#71202a; border-radius:3px; box-shadow:0 8px 20px #64252b22; z-index:0; }
-.envelope-front { clip-path:polygon(0 0,50% 58%,100% 0,100% 100%,0 100%); background:linear-gradient(33deg,#a54446 49.8%,#9c3c40 50%); z-index:4; }
-.envelope-flap { clip-path:polygon(0 0,100% 0,50% 58%); background:#812831; transform-origin:top center; transition:transform .65s ease; z-index:5; backface-visibility:hidden; }
-.envelope-letter { position:absolute; display:block; width:90%; height:142px; background:var(--paper); left:5%; bottom:5px; z-index:2; border:1px solid #ead9d1; padding:8px; transition:transform .85s cubic-bezier(.3,.1,.25,1) .28s; overflow:hidden; }
+.envelope-front { border-radius:4px; clip-path:polygon(0 0,50% 50%,100% 0,100% 100%,0 100%); background:linear-gradient(33deg,#a54446 49.8%,#9c3c40 50%); z-index:4; }
+.envelope-flap { clip-path:polygon(0 0,100% 0,50% 50%); background:#812831; transform-origin:top center; transition:transform .65s ease; z-index:5; backface-visibility:hidden; }
+.envelope-letter { position:absolute; display:block; width:90%; height:94%; background:var(--paper); left:5%; bottom:5px; z-index:2; border:1px solid #ead9d1; padding:8px; transition:transform .85s cubic-bezier(.3,.1,.25,1) .28s; overflow:hidden; }
 .envelope-letter img { height:88px; object-position:center 28%; }
 .envelope-letter>span { font-family:var(--font-wedding-script),cursive; font-size:19px; line-height:1.1; color:var(--wine); display:block; margin-top:4px; }
-.wax-seal { display:flex; align-items:center; justify-content:center; gap:2px; position:absolute; width:27px; height:27px; border-radius:50%; top:63px; left:100px; z-index:6; color:#eddfb1; background:radial-gradient(circle at 30% 25%,#b69356,#8a6839); border:3px double #c3a268; box-shadow:1px 3px 5px #4c181f44; font-family:var(--font-serif); font-size:15px; transition:opacity .2s; }
-.wax-seal>span { font-size:10px; font-style:italic; }
-.envelope-shadow { width:230px; height:16px; margin-top:45px; background:#4b25241c; filter:blur(8px); border-radius:50%; transition:transform .7s,opacity .7s; }
+.wax-seal { display:flex; align-items:center; justify-content:center; gap:2px; position:absolute; width:11%; height:auto; aspect-ratio:1; border-radius:50%; top:42%; left:44.5%; z-index:6; color:#eddfb1; background:radial-gradient(circle at 30% 25%,#b69356,#8a6839); border:3px double #c3a268; box-shadow:1px 3px 5px #4c181f44; font-family:var(--font-serif); font-size:8px; transition:opacity .2s; }
+.wax-seal>span { font-size:6px; font-style:italic; }
+.envelope-shadow { position:absolute; top:calc(100% + 54px); width:115%; height:20px; background:#0004; filter:blur(7px); border-radius:50%; transition:transform .7s,opacity .7s; }
 .envelope-caption { margin-top:28px; text-align:center; font-family:var(--font-serif); font-size:15px; color:#725d58; }
 .envelope-caption span { display:block; font-family:var(--font-sans); font-size:9px; letter-spacing:2px; margin-top:7px; }
 .is-opening .envelope-flap { transform:rotateX(180deg); z-index:1; }
@@ -321,8 +321,8 @@ textarea { resize:vertical; }
    and a separate seal/flap/letter sequence. Keep movement out of form fields. */
 .soft-pulse { animation:wedding-pulse 2s ease-in-out infinite; }
 @keyframes wedding-pulse { 0%,100% { transform:scale(1); } 50% { transform:scale(1.035); } }
-.envelope-button { animation:envelope-float 3.5s ease-in-out infinite; }
-@keyframes envelope-float { 0%,100% { transform:translateY(0); } 50% { transform:translateY(-5px); } }
+.envelope-button { animation:envelope-float 3s ease-in-out infinite; }
+@keyframes envelope-float { 0%,100% { transform:translateY(0); } 50% { transform:translateY(-20px); } }
 .is-opening .envelope-button { animation:none; }
 .is-opening .envelope-prompt { opacity:0; transition:opacity .3s; }
 .wax-seal { transition:opacity .25s,transform .3s; }

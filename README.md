@@ -68,7 +68,8 @@ Mở `src/config/wedding.ts`. Đây là nơi duy nhất cần sửa cho nội du
 | `invitation`, `family` | Lời ngỏ, tên bố mẹ, địa chỉ và ảnh chân dung hai bên |
 | `hero`, `portrait`, `gallery` | Đường dẫn ảnh và alt mô tả |
 | `events` | Tên lễ, địa điểm, giờ, ngày hiển thị, Maps và giờ bắt đầu/kết thúc lịch |
-| `music` | Đường dẫn MP3; chuỗi rỗng khi chưa thêm nhạc |
+| `music` | Đường dẫn MP3 đang dùng; chuỗi rỗng để tắt nhạc |
+| `musicCredit` | Tên bản nhạc, tác giả, nguồn và giấy phép |
 | `gifts` | Chủ tài khoản, ngân hàng, STK, đường dẫn ảnh VietQR |
 
 Thông tin gia đình đã được xác nhận; ba nhà trai là Nguyễn Xuân Bốn. Tiệc nhà gái ngày 06/12/2026 và nhà trai ngày 12/12/2026 đều bắt đầu lúc 11:00. Hai nút bản đồ dùng đúng link Maps gia đình cung cấp. Thời lượng trên lịch hiện mặc định 1 giờ và có ghi chú chưa xác nhận giờ kết thúc tiệc. Khi biết giờ thật, điền `events[].time`, sửa `start`/`end` theo giờ đúng và đổi `date` theo giờ lễ nhà gái nếu muốn countdown đến giờ đó. Khi `time` trống, nút lịch tạo sự kiện cả ngày theo ngày dương lịch.
@@ -89,7 +90,7 @@ qr: '/images/groom-qr.png',
 
 Lấy mã VietQR từ ứng dụng ngân hàng, kiểm tra đúng ngân hàng/STK/chủ tài khoản rồi lưu ảnh vào `public/images`. Dữ liệu STK hiện tại chỉ là ví dụ; không có QR giả để khách chuyển tiền nhầm. Nếu `qr` trống, hộp mừng cưới hiển thị “Thông tin mừng cưới sẽ được cập nhật”, không hiển thị số tài khoản minh họa.
 
-Đặt nhạc có bản quyền sử dụng tại `public/music/wedding.mp3`. Nhạc chỉ bắt đầu sau thao tác bấm “Mở thiệp mời” hoặc nút nhạc; trình duyệt có thể chặn autoplay nên không phát tự động khi tải trang. Nút nhạc báo lỗi nếu file không tải được. Không kèm sẵn bản nhạc có bản quyền.
+Đặt nhạc có bản quyền sử dụng tại `public/music/wedding.mp3`. Nhạc chỉ bắt đầu sau thao tác bấm “Mở thiệp mời” hoặc nút nhạc; trình duyệt có thể chặn autoplay nên không phát tự động khi tải trang. Nút nhạc báo lỗi nếu file không tải được. Đã kèm nhạc A Kind Of Hope — Scott Buckley theo CC BY 4.0, có ghi nguồn trên thiệp. Có thể đổi nhạc trong config và cập nhật `musicCredit` tương ứng.
 
 ### Lưu RSVP thật bằng Supabase
 
@@ -145,3 +146,12 @@ Tài liệu chính thức: [Next.js setup](https://nextjs.org/docs/app/getting-s
 - Mở phong bì gồm lật nắp 1,2 giây, kéo ảnh sau 0,5 giây trong 1 giây, ba tim bay bắt đầu lần lượt ở 1,2 / 1,4 / 1,6 giây. Ở 3,4 giây, phong bì bắt đầu tan dần trong 0,85 giây; các tim tiếp tục bay trên trang chính tới khi hoàn tất. Các khối nội dung chỉ bắt đầu xuất hiện sau khi mở thiệp.
 - Hai gia đình xuất hiện từ hai bên; ảnh phóng nhẹ khi vào vùng nhìn; tiêu đề tiệc/ngày/album phóng nhẹ theo chu kỳ 2 giây như mẫu. Hỗ trợ tùy chọn giảm chuyển động của thiết bị.
 - Máy tính dùng khung thiệp dọc cuộn riêng; điện thoại dùng toàn màn hình với vùng cuộn trong thiệp để tránh thanh cuộn làm co sai kích thước. Đường cong trắng ở chân ảnh thay cho lớp màu mờ của bản trước.
+
+
+### Đối chiếu toàn bộ mẫu và nhạc nền (18/11/2026)
+
+Các số đo và khác biệt theo dữ liệu được ghi trong `docs/reference-review.md`. Họa tiết nơ, chữ WEDDING/GROOM/BRIDE/THANKS, dấu niêm phong, xe cưới và đường đi dùng các tài nguyên được xác định từ mẫu, nguồn ghi trong `public/images/decorations/SOURCES.json`.
+
+Nhạc nền: A Kind Of Hope — Scott Buckley, CC BY 4.0, nguồn https://www.scottbuckley.com.au/library/a-kind-of-hope/. Bản đầy đủ được nén lại ở 112 kbps để tải trên điện thoại; thông tin tại `public/music/ATTRIBUTION.txt`. Nhạc bắt đầu sau thao tác mở thiệp, lặp lại, nút nhạc hỗ trợ tạm dừng/tiếp tục. Giữ ghi nguồn khi thay đổi bố cục.
+
+Thẻ RSVP ngoài trang giữ bố cục ngắn như mẫu; khi tiếp tục sẽ mở form đầy đủ số điện thoại, bên gia đình, số khách và lời chúc. Bảng bên phải trên máy tính có tab QR cho chính link đang mở, không phụ thuộc dịch vụ tạo QR bên ngoài. RSVP vẫn theo cấu hình lưu dữ liệu trong `.env.local`; chế độ demo thông báo rõ chưa lưu.

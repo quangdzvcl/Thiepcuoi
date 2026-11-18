@@ -81,6 +81,7 @@ h1 i { font-size:25px; font-weight:400; }
 .cover-dates>a:first-child { border-right:1px solid var(--line); }
 .cover-dates span { font-size:9px; letter-spacing:2px; color:var(--wine); }
 .cover-dates strong { font-family:var(--font-serif); font-size:21px; font-weight:400; }
+.cover-dates time { font-size:10px; color:var(--wine); }
 .cover-dates small { font-size:9px; color:var(--muted); }
 .scroll-hint { display:flex; align-items:center; justify-content:center; gap:10px; font-size:7px; letter-spacing:2px; color:var(--muted); margin-top:26px; }
 .desktop-note { position:fixed; width:180px; left:calc(50% - 565px); top:50%; transform:translateY(-50%); text-align:center; }

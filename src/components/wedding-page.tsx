@@ -14,7 +14,7 @@ import RibbonBow from './ribbon-bow';
 function calendarLink(event: typeof w.events[number]) {
   const compact = (date: string) => new Date(date).toISOString().replace(/[-:]/g, '').replace(/\.\d{3}/, '');
   const dates = event.time ? `${compact(event.start)}/${compact(event.end)}` : `${event.start.slice(0, 10).replaceAll('-', '')}/${event.end.slice(0, 10).replaceAll('-', '')}`;
-  return `https://calendar.google.com/calendar/render?${new URLSearchParams({ action: 'TEMPLATE', text: `${event.title} · ${w.groom} & ${w.bride}`, dates, details: 'Trân trọng kính mời bạn đến chung vui cùng gia đình.', location: `${event.venue}, ${event.address}`, ctz: 'Asia/Ho_Chi_Minh' })}`;
+  return `https://calendar.google.com/calendar/render?${new URLSearchParams({ action: 'TEMPLATE', text: `${event.title} · ${w.groom} & ${w.bride}`, dates, details: 'Trân trọng kính mời bạn đến chung vui cùng gia đình. Thời lượng trên lịch được đặt mặc định 1 giờ, không phải giờ kết thúc tiệc đã được xác nhận.', location: `${event.venue}, ${event.address}`, ctz: 'Asia/Ho_Chi_Minh' })}`;
 }
 
 function GiftDialog({ close }: { close: () => void }) {
@@ -79,7 +79,7 @@ export default function WeddingPage() {
       <main className="invitation-page" id="main-content" tabIndex={-1}>
         <section className="wedding-cover" id="top" aria-labelledby="couple-title">
           <div className="cover-photo"><img src={w.hero} alt={`Ảnh cưới vest trắng của ${w.groom} và ${w.bride}`} width={2000} height={2999} fetchPriority="high" /><span className="cover-photo-label">TOGETHER, FOREVER & ALWAYS</span></div>
-          <div className="cover-copy"><RibbonBow /><p className="cover-overline">OUR WEDDING</p><h1 id="couple-title"><span>{w.groom}</span><i>&</i><span>{w.bride}</span></h1><p className="script invitation-line">Trân trọng kính mời</p><p className="cover-message">Bạn đến chung vui trong ngày hạnh phúc<br />của chúng mình và gia đình.</p><div className="cover-dates">{w.events.map((event, i) => <a key={event.title} href={`#event-${i}`}><span>{event.subtitle}</span><strong>{event.start.slice(0, 10).split('-').reverse().join(' . ')}</strong><small>{event.lunarDay.replace('Nhằm ngày ', '')}</small></a>)}</div><a className="scroll-hint" href="#families">CÙNG MỞ CHƯƠNG MỚI <ArrowDown size={15} /></a></div>
+          <div className="cover-copy"><RibbonBow /><p className="cover-overline">OUR WEDDING</p><h1 id="couple-title"><span>{w.groom}</span><i>&</i><span>{w.bride}</span></h1><p className="script invitation-line">Trân trọng kính mời</p><p className="cover-message">Bạn đến chung vui trong ngày hạnh phúc<br />của chúng mình và gia đình.</p><div className="cover-dates">{w.events.map((event, i) => <a key={event.title} href={`#event-${i}`}><span>{event.subtitle}</span><strong>{event.start.slice(0, 10).split('-').reverse().join(' . ')}</strong>{event.time && <time dateTime={event.start}>Bắt đầu {event.time}</time>}<small>{event.lunarDay.replace('Nhằm ngày ', '')}</small></a>)}</div><a className="scroll-hint" href="#families">CÙNG MỞ CHƯƠNG MỚI <ArrowDown size={15} /></a></div>
         </section>
         <section className="family-section section-pad" id="families">
           <Reveal><p className="eyebrow">HAI GIA ĐÌNH · MỘT NIỀM VUI</p><h2 className="section-title">Trân trọng báo hỷ</h2></Reveal>

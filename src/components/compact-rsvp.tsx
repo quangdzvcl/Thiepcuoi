@@ -25,7 +25,7 @@ export default function CompactRSVP() {
   const [details, setDetails] = useState(false);
   function next(event: FormEvent<HTMLFormElement>) { event.preventDefault(); setDetails(true); }
   return <><form className="compact-rsvp" onSubmit={next}>
-    <label htmlFor="guest-name">Họ và tên</label><input id="guest-name" value={name} onChange={event => setName(event.target.value)} placeholder="Nhập tên của bạn" required minLength={2} maxLength={100} autoComplete="name" />
+    <div className="compact-name"><label htmlFor="guest-name">Họ và tên</label><input id="guest-name" value={name} onChange={event => setName(event.target.value)} placeholder="Nhập tên của bạn" required minLength={2} maxLength={100} autoComplete="name" /></div>
     <fieldset><legend>Bạn sẽ tham dự chứ?</legend>
       {[['yes', 'Có, tôi sẽ tham dự'], ['no', 'Tôi bận, rất tiếc không thể tham dự'], ['maybe', 'Tôi sẽ xác nhận sau']].map(([value, label]) => <label key={value}><input type="radio" name="attendance-preview" value={value} checked={attendance === value} onChange={() => setAttendance(value)} />{label}</label>)}
     </fieldset><button className="button primary" type="submit">Tiếp tục xác nhận</button>

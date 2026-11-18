@@ -29,6 +29,7 @@ Bản chính: https://thiepcuoi-xuanquang-vohong.vercel.app/
 | Tháng / năm | Playfair Display | 23.4px |
 | Ngày âm | Quicksand, italic, weight 500 | 12.48px |
 | Thơ ngắn | Carlytte, weight 500 | 20.28px |
+| Thẻ RSVP | Arial | 10.92px; tiêu đề 14.92px |
 | THANKS | Ảnh chữ trang trí gốc | 156 × 43.42px |
 
 Kích thước chữ tính theo chiều rộng thiệp. Sai khác số đo dưới 1px có thể do làm tròn điểm ảnh/zoom trình duyệt. Khung desktop tại 1280 × 720 rộng 378px, nằm tại x ≈ 207px; bảng bên phải rộng 360px.
@@ -59,4 +60,4 @@ Bìa có vòng cung đúng tỷ lệ, chữ WEDDING và nơ thật của mẫu. 
 
 ## Kiểm tra
 
-Đã kiểm tra mở/đóng ảnh, đổi ảnh, mở/đóng hộp mừng cưới, bước RSVP giữ tên và lựa chọn tham dự, tự vô hiệu số khách khi chọn không tham dự, mở QR trên máy tính, phát/tắt/tiếp tục nhạc (342.6 giây), build và TypeScript. Các liên kết bản đồ và giờ tiệc giữ theo cấu hình đã xác nhận.
+Đã kiểm tra mở/đóng ảnh, đổi ảnh, mở/đóng hộp mừng cưới, bước RSVP giữ tên và lựa chọn tham dự, tự vô hiệu số khách khi chọn không tham dự, mở QR trên máy tính, phát/tắt/tiếp tục nhạc (342.6 giây), build và TypeScript. Đã sửa Chủ Nhật không xuống dòng, căn giữa số đếm ngược và đối chiếu font Arial của thẻ RSVP. Các liên kết bản đồ và giờ tiệc giữ theo cấu hình đã xác nhận.

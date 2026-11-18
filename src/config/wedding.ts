@@ -1,20 +1,18 @@
-// Ảnh cưới thật đã tối ưu WebP; địa điểm, giờ và ngân hàng vẫn là dữ liệu mẫu.
+// Thông tin gia đình đã xác nhận. Giờ tổ chức và ngân hàng chưa được xác nhận.
 export const wedding = {
   groom: 'Xuân Quang', bride: 'Võ Hồng', initials: 'Q & H',
-  date: '2026-12-06T09:00:00+07:00', dateLabel: '06 & 12.12.2026',
-  location: 'Thành phố Hồ Chí Minh',
+  date: '2026-12-06T00:00:00+07:00', dateLabel: '06 & 12.12.2026',
+  location: 'Đắk Lắk · Nghệ An',
+  family: {
+    groom: { father: 'Nguyễn Xuân Bổn', mother: 'Hồ Thị Vân', address: 'Xóm Liên Trì, xã Văn Tụ, tỉnh Nghệ An', province: 'Nghệ An', portrait: '/images/wedding-3369.webp' },
+    bride: { father: 'Võ Hồng Rân', mother: 'Hồ Thị Hiền', address: 'Thôn 10, xã Ea Nuôl, tỉnh Đắk Lắk', province: 'Đắk Lắk', portrait: '/images/wedding-2436.webp' },
+  },
   invitation: 'Có những cuộc gặp gỡ là duyên, có những hành trình là định mệnh. Sau những năm tháng cùng nhau lớn lên, chúng mình đã sẵn sàng viết chương mới của cuộc đời. Sự hiện diện của bạn sẽ là món quà quý giá nhất trong ngày đặc biệt ấy.',
   hero: '/images/wedding-2505.webp',
   portrait: '/images/wedding-2716.webp',
-  story: [
-    { date: 'Tháng 03, 2020', title: 'Ngày mình gặp nhau', text: 'Một buổi chiều đầy nắng, một lời chào rất khẽ. Chúng mình không ngờ đó là khởi đầu của mãi mãi.' },
-    { date: 'Tháng 12, 2020', title: 'Từ hai người thành đôi', text: 'Giữa thành phố vội vã, chúng mình tìm thấy một người để cùng chậm lại.' },
-    { date: 'Tháng 06, 2026', title: 'Một lời hẹn trăm năm', text: 'Một chiếc nhẫn, một câu hỏi và một lời đồng ý cho tất cả những ngày phía trước.' },
-    { date: '06 & 12 tháng 12, 2026', title: 'Và mình gọi nhau là nhà', text: 'Cùng gia đình và những người thương, chúng mình bắt đầu một hành trình mới.' },
-  ],
   events: [
-    { title: 'Lễ Cưới Nhà Gái', subtitle: 'CHUNG VUI CÙNG GIA ĐÌNH CÔ DÂU', venue: 'Tư gia nhà gái', address: '123 Nguyễn Đình Chiểu, TP. Hồ Chí Minh', start: '2026-12-06T09:00:00+07:00', end: '2026-12-06T11:00:00+07:00', time: '09:00', day: 'Chủ Nhật, 06 tháng 12 năm 2026', lunarDay: 'Nhằm ngày 28 tháng 10 âm lịch', maps: 'https://www.google.com/maps/search/?api=1&query=123+Nguyen+Dinh+Chieu+Ho+Chi+Minh' },
-    { title: 'Lễ Cưới Nhà Trai', subtitle: 'CHUNG VUI CÙNG GIA ĐÌNH CHÚ RỂ', venue: 'GEM Center · Sảnh Pearl', address: '8 Nguyễn Bỉnh Khiêm, TP. Hồ Chí Minh', start: '2026-12-12T17:30:00+07:00', end: '2026-12-12T21:00:00+07:00', time: '17:30', day: 'Thứ Bảy, 12 tháng 12 năm 2026', lunarDay: 'Nhằm ngày 04 tháng 11 âm lịch', maps: 'https://www.google.com/maps/search/?api=1&query=GEM+Center+Ho+Chi+Minh' },
+    { title: 'Lễ Vu Quy', subtitle: 'NHÀ GÁI', venue: 'Tư gia nhà gái', address: 'Thôn 10, xã Ea Nuôl, tỉnh Đắk Lắk', start: '2026-12-06T00:00:00+07:00', end: '2026-12-07T00:00:00+07:00', time: '', day: 'Chủ Nhật, 06 tháng 12 năm 2026', lunarDay: 'Nhằm ngày 28 tháng 10 âm lịch', maps: `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent('Thôn 10, xã Ea Nuôl, tỉnh Đắk Lắk')}` },
+    { title: 'Lễ Thành Hôn', subtitle: 'NHÀ TRAI', venue: 'Tư gia nhà trai', address: 'Xóm Liên Trì, xã Văn Tụ, tỉnh Nghệ An', start: '2026-12-12T00:00:00+07:00', end: '2026-12-13T00:00:00+07:00', time: '', day: 'Thứ Bảy, 12 tháng 12 năm 2026', lunarDay: 'Nhằm ngày 04 tháng 11 âm lịch', maps: `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent('Xóm Liên Trì, xã Văn Tụ, tỉnh Nghệ An')}` },
   ],
   gallery: [
     { src: '/images/wedding-2505.webp', alt: 'Xuân Quang trong vest trắng và Võ Hồng cùng nhìn về phía trước', wide: false },

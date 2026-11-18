@@ -1,6 +1,6 @@
 # Thiệp cưới · Xuân Quang & Võ Hồng
 
-Website minh họa tiếng Việt, Next.js App Router + TypeScript, Tailwind CSS 4, Framer Motion, lucide-react và canvas-confetti. Dùng Next.js 16 (đáp ứng yêu cầu 14+), React 19, Node.js 22.14+. Deploy bằng Next.js runtime trên Vercel, không dùng static export vì có API RSVP.
+Thiệp cưới tiếng Việt phong cách trắng và đỏ rượu, mở phong bì, nơ đỏ và bố cục dọc, Next.js App Router + TypeScript, Tailwind CSS 4, Framer Motion, lucide-react và canvas-confetti. Dùng Next.js 16 (đáp ứng yêu cầu 14+), React 19, Node.js 22.14+. Deploy bằng Next.js runtime trên Vercel, không dùng static export vì có API RSVP.
 
 ## Cấu trúc
 
@@ -12,7 +12,9 @@ src/
     layout.tsx             # Metadata và ngôn ngữ
     page.tsx
   components/
-    wedding-page.tsx        # Bố cục các section và nhạc
+    wedding-page.tsx        # Báo hỷ, hai lễ cưới, album, nhạc và tiện ích
+    envelope.tsx            # Phong bì mở thiệp, hỗ trợ giảm chuyển động
+    ribbon-bow.tsx          # Nơ đỏ SVG dùng chung
     reveal.tsx              # Scroll animation dùng chung
     countdown.tsx           # Countdown đúng múi giờ
     lightbox.tsx            # Album modal hỗ trợ bàn phím
@@ -21,6 +23,7 @@ src/
   lib/rsvp.ts               # Schema kiểm tra dữ liệu phía server
 public/
   images/                  # Ảnh riêng và VietQR của bạn
+  fonts/                   # Font tiếng Việt đầy đủ + giấy phép OFL
   music/                   # File MP3 có quyền sử dụng
 supabase/schema.sql        # Bảng RSVP + RLS
 tests/rsvp.test.ts
@@ -39,7 +42,7 @@ Copy-Item .env.example .env.local
 npm run dev
 ```
 
-3. Mở [http://localhost:3000](http://localhost:3000). Thử menu mobile, mở thiệp, lịch, bản đồ, lightbox (phím trái/phải, Escape), sao chép STK và RSVP.
+3. Mở [http://localhost:3000](http://localhost:3000). Thử mở phong bì (chuột, chạm hoặc Enter), thanh tiện ích, lịch, bản đồ, lightbox (phím trái/phải, Escape), hộp mừng cưới và RSVP.
 
 Mặc định `RSVP_PROVIDER=demo`: form được kiểm tra nhưng **không lưu thông tin**. Phản hồi sẽ ghi rõ điều này; không bắn confetti hoặc báo đã xác nhận thật. Muốn lưu thật, làm phần Supabase bên dưới.
 
@@ -62,15 +65,17 @@ Mở `src/config/wedding.ts`. Đây là nơi duy nhất cần sửa cho nội du
 | --- | --- |
 | `groom`, `bride`, `initials` | Tên và chữ viết tắt |
 | `date`, `dateLabel`, `location` | Ngày giờ countdown, ngày hiển thị, thành phố |
-| `invitation`, `story` | Lời ngỏ và bốn cột mốc |
+| `invitation`, `family` | Lời ngỏ, tên bố mẹ, địa chỉ và ảnh chân dung hai bên |
 | `hero`, `portrait`, `gallery` | Đường dẫn ảnh và alt mô tả |
 | `events` | Tên lễ, địa điểm, giờ, ngày hiển thị, Maps và giờ bắt đầu/kết thúc lịch |
 | `music` | Đường dẫn MP3; chuỗi rỗng khi chưa thêm nhạc |
 | `gifts` | Chủ tài khoản, ngân hàng, STK, đường dẫn ảnh VietQR |
 
-Luôn dùng ngày ISO có múi giờ, ví dụ `2026-12-12T17:30:00+07:00`. Sửa cả `dateLabel`, `events[].time`, `events[].day` để nội dung hiển thị khớp ngày thật. Lịch Google tự chuyển giờ sang UTC đúng múi giờ Việt Nam.
+Thông tin gia đình đã được xác nhận; giờ tổ chức hiện để trống nên trên thiệp có dòng chờ cập nhật. Khi biết giờ thật, điền `events[].time`, sửa `start`/`end` theo giờ đúng và đổi `date` theo giờ lễ nhà gái nếu muốn countdown đến giờ đó. Khi `time` trống, nút lịch tạo sự kiện cả ngày theo ngày dương lịch.
 
-Đặt ảnh riêng tại `public/images/`, ví dụ `cover.jpg`, `couple.jpg`, `album-1.jpg`, `groom-qr.png`, `bride-qr.png`. Trong config dùng `/images/cover.jpg` (không có `public`). Nên dùng WebP/JPEG nén, khoảng 1600–2000px cho cover và 1000px cho album. Ảnh cưới thật đã lưu tại `public/images/wedding-*.webp`, tối ưu từ bộ ảnh studio được cung cấp. Bìa dùng ảnh vest trắng 2505, phần câu chuyện dùng ảnh ôm nhau 2716 và album gồm 11 ảnh vest trắng, vest đen, áo dài và chi tiết. Ảnh ngang 2740 chiếm hai cột để giữ đủ bố cục. Không cần tải ảnh từ dịch vụ bên ngoài. Font Playfair Display và Be Vietnam Pro được lưu đầy đủ ký tự tiếng Việt tại `public/fonts`, tải qua `next/font/local`; trình duyệt không cần gọi Google Fonts. Giấy phép OFL đi kèm từng bộ font.
+Luôn dùng ngày ISO có múi giờ, ví dụ `2026-12-12T17:30:00+07:00`. Sửa cả `dateLabel`, `events[].time`, `events[].day` để nội dung hiển thị khớp ngày thật. Lịch Google tự chuyển giờ sang UTC đúng múi giờ Việt Nam khi đã có giờ; nếu chưa có giờ, lịch lưu sự kiện cả ngày, không tự đặt giờ mẫu.
+
+Đặt ảnh riêng tại `public/images/`, ví dụ `cover.jpg`, `couple.jpg`, `album-1.jpg`, `groom-qr.png`, `bride-qr.png`. Trong config dùng `/images/cover.jpg` (không có `public`). Nên dùng WebP/JPEG nén, khoảng 1600–2000px cho cover và 1000px cho album. Ảnh cưới thật đã lưu tại `public/images/wedding-*.webp`, tối ưu từ bộ ảnh studio được cung cấp. Bìa dùng ảnh vest trắng 2505, phần câu chuyện dùng ảnh ôm nhau 2716 và album gồm 11 ảnh vest trắng, vest đen, áo dài và chi tiết. Ảnh ngang 2740 chiếm hai cột để giữ đủ bố cục. Không cần tải ảnh từ dịch vụ bên ngoài. Font Dancing Script, Playfair Display và Be Vietnam Pro được lưu đầy đủ ký tự tiếng Việt tại `public/fonts`, tải qua `next/font/local`; trình duyệt không cần gọi Google Fonts. Giấy phép OFL đi kèm từng bộ font.
 
 Ví dụ:
 
@@ -82,7 +87,7 @@ music: '/music/wedding.mp3',
 qr: '/images/groom-qr.png',
 ```
 
-Lấy mã VietQR từ ứng dụng ngân hàng, kiểm tra đúng ngân hàng/STK/chủ tài khoản rồi lưu ảnh vào `public/images`. Dữ liệu STK hiện tại chỉ là ví dụ; không có QR giả để khách chuyển tiền nhầm. Nếu `qr` trống, trang sẽ hiện thông báo chưa có QR.
+Lấy mã VietQR từ ứng dụng ngân hàng, kiểm tra đúng ngân hàng/STK/chủ tài khoản rồi lưu ảnh vào `public/images`. Dữ liệu STK hiện tại chỉ là ví dụ; không có QR giả để khách chuyển tiền nhầm. Nếu `qr` trống, hộp mừng cưới hiển thị “Thông tin mừng cưới sẽ được cập nhật”, không hiển thị số tài khoản minh họa.
 
 Đặt nhạc có bản quyền sử dụng tại `public/music/wedding.mp3`. Nhạc chỉ bắt đầu sau thao tác bấm “Mở thiệp mời” hoặc nút nhạc; trình duyệt có thể chặn autoplay nên không phát tự động khi tải trang. Nút nhạc báo lỗi nếu file không tải được. Không kèm sẵn bản nhạc có bản quyền.
 

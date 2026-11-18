@@ -1,0 +1,15 @@
+Reference font sources (retrieved 2026-11-18)
+https://cinelove.me/showcase/UacO5aGi6UUsa161Ei56OJhTOGT5Ga610
+Font URLs declared in the reference page font.css stylesheets:
+https://assets.cinelove.me/fonts/webfonts/anisa-signature/anisa-signature.woff2
+https://assets.cinelove.me/fonts/webfonts/katty-diona/katty-diona.woff2
+https://assets.cinelove.me/fonts/webfonts/the-hamstter/the-hamstter.woff2
+https://assets.cinelove.me/fonts/webfonts/carlytte/carlytte.woff2
+https://assets.cinelove.me/fonts/webfonts/soul-note-display/soul-note-display.woff2
+Original embedded copyright metadata is retained. These reference fonts are not covered by the OFL files for the Google Fonts families.
+Anisa Signature: Copyright (c) 2024, Basnistudio
+Katty Diona: Copyright RantauType, 2023
+The Hamstter: Copyright (c) 2021, Vultype Co.
+Carlytte: Copyright (c) 2021, Galatamen
+Soul Note Display: Copyright (c) 2024, Mujahid Al Fikri
+Google Fonts Quicksand and Montserrat: https://github.com/google/fonts/tree/main/ofl (individual OFL files included).

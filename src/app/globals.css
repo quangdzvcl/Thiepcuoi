@@ -6,7 +6,7 @@
   --font-sans: var(--font-wedding-sans), Arial, sans-serif;
   --font-serif: var(--font-wedding-serif), Georgia, serif;
 }
-:root { --wine:#86232c; --wine-dark:#68151c; --paper:#fffdfa; --ink:#352e2c; --muted:#766b67; --line:#e9dcda; --blush:#f8efed; }
+:root { --wine:#790b0b; --wine-dark:#620909; --invitation-width:min(100vw,52.5dvh); --paper:#fffdfa; --ink:#352e2c; --muted:#766b67; --line:#e9dcda; --blush:#f8efed; }
 * { box-sizing:border-box; }
 html { scroll-behavior:smooth; scroll-padding-top:24px; }
 body { margin:0; background:#fff; color:var(--ink); font-family:var(--font-sans); font-size:13px; line-height:1.9; }
@@ -42,29 +42,30 @@ p { color:var(--muted); }
 /* The opening envelope is drawn in CSS, with a real photo inside. */
 .envelope-screen { position:fixed; inset:0; z-index:100; display:flex; flex-direction:column; justify-content:center; align-items:center; background:#fff; padding:30px 20px; }
 .envelope-stage { --envelope-width:min(60vw,31.5dvh); position:relative; display:flex; flex-direction:column; align-items:center; gap:40px; }
-.envelope-prompt { font-family:var(--font-wedding-script),cursive; font-size:27.8px; line-height:20px; white-space:nowrap; color:var(--wine); margin:0; }
+.envelope-prompt { font-family:var(--font-wedding-script),cursive; font-size:calc(var(--envelope-width) * .1633333333); line-height:20px; white-space:nowrap; color:var(--wine); margin:0; }
 .envelope-button { width:var(--envelope-width); height:auto; aspect-ratio:3/2; flex-shrink:0; padding:0; position:relative; background:none; perspective:900px; isolation:isolate; transition:transform .35s; }
 .envelope-button:focus-visible { outline:2px solid #d7b8b3; outline-offset:9px; border-radius:3px; }
 .envelope-button:hover { transform:translateY(-4px); }
 .envelope-button:disabled { opacity:1; }
 .envelope-back,.envelope-front,.envelope-flap { position:absolute; inset:0; display:block; }
-.envelope-back { background:#71202a; border-radius:3px; box-shadow:0 8px 20px #64252b22; z-index:0; }
-.envelope-front { border-radius:4px; clip-path:polygon(0 0,50% 50%,100% 0,100% 100%,0 100%); background:linear-gradient(33deg,#a54446 49.8%,#9c3c40 50%); z-index:4; }
-.envelope-flap { clip-path:polygon(0 0,100% 0,50% 50%); background:#812831; transform-origin:top center; transition:transform .65s ease; z-index:5; backface-visibility:hidden; }
-.envelope-letter { position:absolute; display:block; width:90%; height:94%; background:var(--paper); left:5%; bottom:5px; z-index:2; border:1px solid #ead9d1; padding:8px; transition:transform .85s cubic-bezier(.3,.1,.25,1) .28s; overflow:hidden; }
-.envelope-letter img { height:88px; object-position:center 28%; }
+.envelope-back { background:#812927; border-radius:3px; box-shadow:0 8px 20px #64252b22; z-index:0; }
+.envelope-front { border-radius:0 0 6px 6px; clip-path:polygon(0 0,50% 50%,100% 0,100% 100%,0 100%); background:conic-gradient(from 56deg at 50% 50%,#a33f3d 0deg 68deg,#a84644 68deg 180deg,#a33f3d 180deg); z-index:4; }
+.envelope-flap { clip-path:polygon(0 0,100% 0,50% 54%); background:#812927; transform-origin:top center; transition:transform 1.2s cubic-bezier(.25,.46,.45,.94),z-index 1.2s; z-index:5; }
+.envelope-letter { position:absolute; display:block; width:90%; height:90%; background:white; left:5%; top:5%; z-index:2; border-radius:6px; box-shadow:0 2px 26px #0002; transition:transform 1s cubic-bezier(.25,.46,.45,.94) .5s; overflow:hidden; }
+.envelope-letter img { width:100%; height:100%; object-position:center 32%; }
 .envelope-letter>span { font-family:var(--font-wedding-script),cursive; font-size:19px; line-height:1.1; color:var(--wine); display:block; margin-top:4px; }
-.wax-seal { display:flex; align-items:center; justify-content:center; gap:2px; position:absolute; width:11%; height:auto; aspect-ratio:1; border-radius:50%; top:42%; left:44.5%; z-index:6; color:#eddfb1; background:radial-gradient(circle at 30% 25%,#b69356,#8a6839); border:3px double #c3a268; box-shadow:1px 3px 5px #4c181f44; font-family:var(--font-serif); font-size:8px; transition:opacity .2s; }
+.wax-seal { display:flex; align-items:center; justify-content:center; gap:2px; position:absolute; width:13%; height:auto; aspect-ratio:1; border-radius:50%; top:40%; left:43.5%; z-index:6; color:#eddfb1; background:radial-gradient(circle at 30% 25%,#b69356,#8a6839); border:3px double #c3a268; box-shadow:1px 3px 5px #4c181f44; font-family:var(--font-serif); font-size:8px; transition:opacity .2s; }
 .wax-seal>span { font-size:6px; font-style:italic; }
 .envelope-shadow { position:absolute; top:calc(100% + 54px); width:115%; height:20px; background:#0004; filter:blur(7px); border-radius:50%; transition:transform .7s,opacity .7s; }
 .envelope-caption { margin-top:28px; text-align:center; font-family:var(--font-serif); font-size:15px; color:#725d58; }
 .envelope-caption span { display:block; font-family:var(--font-sans); font-size:9px; letter-spacing:2px; margin-top:7px; }
 .is-opening .envelope-flap { transform:rotateX(180deg); z-index:1; }
-.is-opening .envelope-letter { transform:translateY(-145px); }
-.is-opening .wax-seal { opacity:0; }
-.is-opening .envelope-shadow { transform:scale(.7); opacity:.3; }
+.is-opening .envelope-letter { transform:translateY(-52.7778%); }
+.is-opening .wax-seal { opacity:1; }
+.is-opening .envelope-shadow { opacity:1; }
 
 /* Full-length photograph, a soft white edge and a burgundy ribbon. */
+.wedding-cover { overflow:hidden; }
 .cover-photo { position:relative; aspect-ratio:2/3; max-height:790px; overflow:hidden; background:#f0e1d0; }
 .cover-photo>img { width:100%; height:100%; object-position:center 30%; transform-origin:center 90%; }
 .cover-photo-label { position:absolute; top:12px; left:18px; text-align:left; font-size:10px; line-height:1.4; color:var(--wine); }
@@ -100,7 +101,7 @@ h1 i { font-size:25px; font-weight:400; }
 .family-column .family-address { font-family:var(--font-sans); font-size:10px; color:var(--muted); line-height:1.9; min-height:58px; margin:12px 0 20px; }
 .individual-photo { aspect-ratio:2/3; overflow:hidden; }
 .individual-photo img { width:100%; height:100%; object-position:center 30%; }
-.family-column:first-child .individual-photo img { transform:scale(1.9); transform-origin:center 22%; }
+.family-column:first-child .individual-photo img { transform:scale(1.7); transform-origin:center 18%; }
 .portrait-label { font-family:var(--font-serif); color:#d2b6b4; display:block; font-size:35px; letter-spacing:2px; line-height:1.5; margin-top:8px; }
 .family-column h4 { font-size:34px; color:var(--wine); line-height:1.4; margin-top:-3px; }
 .family-announcement { margin-top:31px; }
@@ -323,19 +324,19 @@ textarea { resize:vertical; }
 @keyframes wedding-pulse { 0%,100% { transform:scale(1); } 50% { transform:scale(1.035); } }
 .envelope-button { animation:envelope-float 3s ease-in-out infinite; }
 @keyframes envelope-float { 0%,100% { transform:translateY(0); } 50% { transform:translateY(-20px); } }
-.is-opening .envelope-button { animation:none; }
+.is-opening .envelope-button { animation:envelope-float 3s ease-in-out infinite; }
 .is-opening .envelope-prompt { opacity:0; transition:opacity .3s; }
 .wax-seal { transition:opacity .25s,transform .3s; }
-.is-opening .wax-seal { transform:scale(.65); }
+.is-opening .wax-seal { transform:scale(1); }
 .is-opening .envelope-letter { transition-delay:.55s; }
-.is-opening .envelope-front,.is-opening .envelope-back { animation:envelope-lower .6s ease-in .95s both; }
+
 @keyframes envelope-lower { to { transform:translateY(50px); opacity:0; } }
 .journey-car { animation:car-sway 3s ease-in-out infinite; }
 @keyframes car-sway { 50% { transform:translate(5px,-3px) rotate(-3deg); } }
 .card-scroll-controls { display:none; }
 @media(min-width:641px) {
   body { overflow:hidden; }
-  .invitation-page { width:430px; max-width:calc(100% - 36px); height:calc(100dvh - 32px); margin:16px auto; overflow-y:auto; overflow-x:hidden; scroll-behavior:smooth; scrollbar-width:thin; scrollbar-color:#ddd transparent; box-shadow:0 5px 35px #352e2c16; }
+  .invitation-page { width:var(--invitation-width); max-width:calc(100% - 36px); height:calc(100dvh - 32px); margin:16px auto; overflow-y:auto; overflow-x:hidden; scroll-behavior:smooth; scrollbar-width:thin; scrollbar-color:#ddd transparent; box-shadow:0 5px 35px #352e2c16; }
   .section-pad { padding:40px 25px; }
   .section-title { font-size:29px; }
   .eyebrow { font-size:8px; letter-spacing:1.8px; }
@@ -357,16 +358,74 @@ textarea { resize:vertical; }
   .journey { height:190px; }
   .rsvp-card { padding:22px 17px; }
   .form-grid { grid-template-columns:1fr; }
-  .quick-actions { left:calc(50% + 234px); top:55%; bottom:auto; transform:translateY(-50%); flex-direction:column; border:0; box-shadow:none; background:transparent; padding:0; gap:12px; backdrop-filter:none; }
+  .quick-actions { left:calc(50% + var(--invitation-width) / 2 + 16px); top:55%; bottom:auto; transform:translateY(-50%); flex-direction:column; border:0; box-shadow:none; background:transparent; padding:0; gap:12px; backdrop-filter:none; }
   .quick-actions svg { width:42px; height:42px; padding:11px; background:#f7f5f4; border-radius:50%; }
-  .music-button { top:29px; left:calc(50% + 161px); }
+  .music-button { top:29px; left:calc(50% + var(--invitation-width) / 2 - 53px); }
   .desktop-note { left:calc(50% - 465px); }
-  .card-scroll-controls { position:fixed; left:calc(50% + 316px); top:43%; display:flex; flex-direction:column; gap:15px; }
+  .card-scroll-controls { position:fixed; left:calc(50% + var(--invitation-width) / 2 + 100px); top:43%; display:flex; flex-direction:column; gap:15px; }
   .card-scroll-controls button { display:grid; place-items:center; width:44px; height:44px; border-radius:50%; background:#f5f4f3; color:#5c5350; }
 }
 @media(max-width:640px) {
   .ceremony-date strong { font-family:Arial,sans-serif; font-size:62px; font-weight:400; }
   .invitation-line { font-size:34px; }
   .family-column h4 { font-size:34px; }
+}
+/* Reference typography uses distinct families, sized relative to the card. */
+.invitation-page { container-type:inline-size; }
+h1 { font-family:var(--font-wedding-names),cursive; font-size:calc(var(--invitation-width) * 0.08800000000000001); font-weight:700; gap:12px; line-height:1.42; margin:18px 0; }
+h1 i { font-family:var(--font-wedding-names),cursive; font-size:calc(var(--invitation-width) * 0.06); font-weight:400; }
+.cover-overline { font-size:calc(var(--invitation-width) * 0.085); font-weight:400; }
+.cover-photo-label { font-family:var(--font-wedding-date),serif; font-size:calc(var(--invitation-width) * 0.052000000000000005); line-height:1.2; }
+.cover-photo-label .script { font-family:var(--font-wedding-save-date),cursive; font-size:calc(var(--invitation-width) * 0.068); }
+.invitation-line { font-size:calc(var(--invitation-width) * 0.096); color:#000; margin-top:18px; }
+.cover-message { font-family:var(--font-wedding-body),sans-serif; font-size:calc(var(--invitation-width) * 0.03); }
+.cover-dates strong { font-size:calc(var(--invitation-width) * 0.055999999999999994); }
+.family-section { padding-top:24px; }
+.family-grid { margin-top:0; gap:20px; }
+.family-column h3 { font-size:calc(var(--invitation-width) * 0.036000000000000004); font-weight:700; color:#000; }
+.family-column>p { font-size:calc(var(--invitation-width) * 0.03); font-weight:700; color:#000; }
+.family-column strong { font-weight:700; }
+.family-column .family-address { font-size:calc(var(--invitation-width) * 0.025); font-weight:400; }
+.family-column h4 { font-size:calc(var(--invitation-width) * 0.1); color:#000; margin-top:2px; }
+.portrait-label { font-size:calc(var(--invitation-width) * 0.09300000000000001); color:#d9c4c4; }
+.love-word { font-size:calc(var(--invitation-width) * 0.05); letter-spacing:4px; }
+.love-caption { font-size:calc(var(--invitation-width) * 0.09); }
+.ceremony-card h3 { font-size:calc(var(--invitation-width) * 0.06); text-transform:uppercase; }
+.ceremony-invitation { font-family:var(--font-wedding-body),sans-serif; font-size:calc(var(--invitation-width) * 0.03); }
+.ceremony-date { gap:8px; }
+.ceremony-date strong { font-size:calc(var(--invitation-width) * 0.124); font-family:Arial,sans-serif; font-weight:700; }
+.date-wing { font-size:calc(var(--invitation-width) * 0.054000000000000006); border-color:var(--wine); }
+.weekday,.ceremony-date time { font-family:var(--font-wedding-time),serif; font-size:calc(var(--invitation-width) * 0.06); }
+.lunar-date { font-family:var(--font-sans); font-size:calc(var(--invitation-width) * 0.032); color:#000; font-style:normal; }
+.section-title { font-size:calc(var(--invitation-width) * 0.06); }
+.album-section .section-title { text-transform:uppercase; }
+.journey-heading { font-size:calc(var(--invitation-width) * 0.08); }
+.countdown>div { width:calc(var(--invitation-width) * 0.1); padding:8px 4px; border-radius:0; }
+.countdown strong { font-size:calc(var(--invitation-width) * 0.048); }
+.countdown { gap:7px; }
+.countdown span { font-size:calc(var(--invitation-width) * 0.022000000000000002); }
+.love-letter p { font-family:var(--font-wedding-date),serif; font-size:calc(var(--invitation-width) * 0.052000000000000005); line-height:1.5; color:#000; }
+.opening-hearts { --envelope-width:min(60vw,31.5dvh); position:fixed; inset:0; pointer-events:none; z-index:110; overflow:hidden; }
+.opening-heart-origin { position:absolute; top:calc(50% + 30px); left:50%; width:var(--envelope-width); transform:translateX(-50%); }
+.opening-heart { position:absolute; top:0; width:21.4%; height:auto; overflow:visible; will-change:transform,opacity; }
+@media(max-width:640px) { :root { --invitation-width:100vw; } }
+.weekday { font-weight:700; }
+.photo-grid { grid-template-columns:repeat(6,minmax(0,1fr)); }
+.gallery-item { grid-column:span 3; }
+.gallery-item:nth-child(4),.gallery-item:nth-child(5),.gallery-item:nth-child(6),.gallery-item:nth-child(9),.gallery-item:nth-child(10),.gallery-item:nth-child(11) { grid-column:span 2; }
+.gallery-item-landscape { grid-column:span 6; }
+.rsvp-section { background:white; }
+.rsvp-card { border:1px solid #ececec; box-shadow:none; }
+.wedding-footer { position:relative; min-height:calc(var(--invitation-width) * 1.5); padding:0; display:flex; align-items:flex-end; justify-content:center; overflow:hidden; background:#f7f4f1; }
+.wedding-footer>img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+.footer-copy { position:relative; width:100%; padding:40px 20px 100px; background:linear-gradient(transparent,#fff9 40%,#fffd); }
+.footer-copy h2 { font-size:calc(var(--invitation-width) * .13); font-weight:400; letter-spacing:2px; line-height:1.1; margin:0; }
+.footer-copy .script { font-size:calc(var(--invitation-width) * .08); line-height:1.4; margin:10px 0 0; color:var(--wine); }
+.footer-copy span,.footer-copy small { display:block; font-size:10px; color:var(--wine); margin-top:8px; }
+.footer-copy>a { display:grid; place-items:center; margin:12px auto 0; width:34px; height:34px; border:1px solid #c9a8a8; border-radius:50%; color:var(--wine); }
+@media(max-width:640px) {
+  body { overflow:hidden; }
+  .invitation-page { height:100dvh; overflow-y:auto; scroll-behavior:smooth; scrollbar-width:none; }
+  .invitation-page::-webkit-scrollbar { display:none; }
 }
 @media(prefers-reduced-motion:reduce) { html { scroll-behavior:auto; } *,*:before,*:after { animation:none!important; transition:none!important; } }

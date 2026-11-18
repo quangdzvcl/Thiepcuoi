@@ -10,6 +10,7 @@ export const wedding = {
   invitation: 'Có những cuộc gặp gỡ là duyên, có những hành trình là định mệnh. Sau những năm tháng cùng nhau lớn lên, chúng mình đã sẵn sàng viết chương mới của cuộc đời. Sự hiện diện của bạn sẽ là món quà quý giá nhất trong ngày đặc biệt ấy.',
   hero: '/images/wedding-2505-retouched.webp',
   portrait: '/images/wedding-2716-retouched.webp',
+  footer: '/images/wedding-3350-retouched.webp',
   // Thời lượng lưu lịch mặc định 1 giờ; chưa phải giờ kết thúc tiệc được xác nhận.
   events: [
     { title: 'Tiệc Cưới Nhà Gái', subtitle: 'NHÀ GÁI', venue: 'Tư gia nhà gái', address: 'Thôn 10, xã Ea Nuôl, tỉnh Đắk Lắk', start: '2026-12-06T11:00:00+07:00', end: '2026-12-06T12:00:00+07:00', time: '11:00', day: 'Chủ Nhật, 06 tháng 12 năm 2026', lunarDay: 'Nhằm ngày 28 tháng 10 âm lịch', maps: 'https://maps.app.goo.gl/juzR4XVoHfzR9Q9k7' },

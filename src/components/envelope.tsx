@@ -18,12 +18,12 @@ export default function Envelope({ onOpen, onStart }: { onOpen: () => void; onSt
     onStart();
     if (reduced) { onOpen(); return; }
     setOpening(true);
-    timer.current = setTimeout(onOpen, 1900);
+    timer.current = setTimeout(onOpen, 3400);
   }
-  return <motion.div className={`envelope-screen${opening ? ' is-opening' : ''}`} role="dialog" aria-modal="true" aria-label={`Thiệp mời ${wedding.groom} và ${wedding.bride}`} exit={{ opacity: 0 }} transition={{ duration: reduced ? 0 : 0.45 }}>
+  return <motion.div className={`envelope-screen${opening ? ' is-opening' : ''}`} role="dialog" aria-modal="true" aria-label={`Thiệp mời ${wedding.groom} và ${wedding.bride}`} exit={{ opacity: 0 }} transition={{ duration: reduced ? 0 : 0.85, ease: 'easeInOut' }}>
     <div className="envelope-stage"><p className="envelope-prompt">- Chạm vào thiệp để mở -</p>
     <button className="envelope-button" onClick={open} disabled={opening} aria-label={`Mở thiệp cưới ${wedding.groom} và ${wedding.bride}`}>
-      <span className="envelope-back" /><span className="envelope-letter"><img src={wedding.hero} alt="" /><span>{wedding.groom}<br />& {wedding.bride}</span></span><span className="envelope-front" /><span className="envelope-flap" /><span className="wax-seal">Q<span>&</span>H</span>
+      <span className="envelope-back" /><span className="envelope-letter"><img src={wedding.hero} alt="" /></span><span className="envelope-front" /><span className="envelope-flap" /><span className="wax-seal">Q<span>&</span>H</span>
     </button>
     <span className="envelope-shadow" aria-hidden="true" /></div>
   </motion.div>;

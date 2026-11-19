@@ -158,3 +158,8 @@ Thẻ RSVP ngoài trang giữ bố cục ngắn như mẫu; khi tiếp tục s�
 
 
 Tự cuộn đã đối chiếu bằng hai lần đo khi không thao tác trên mẫu: 447,2px trong 7,459 giây, xấp xỉ 60px/giây. Thiệp tự cuộn sau khi mở, dừng khi khách kéo trang, chạm/nhập form, dùng bàn phím hoặc chuyển tới tiện ích. Nút tiếp tục ở góc trái có thể bật lại; tự dừng cuối trang và khi thiết bị bật giảm chuyển động.
+
+
+### Cập nhật 19/11/2026
+Ảnh vòm dùng wedding-3208-retouched.webp. Nhạc đang trỏ đến đúng audio của mẫu CineLove; nguồn bên ngoài có thể thay đổi. File A Kind Of Hope còn trong public/music là phương án dự phòng có giấy phép, không phải bài đang phát. Thông tin CC BY của file dự phòng không áp dụng cho nhạc CineLove.
+RSVP_PROVIDER=demo trong cấu hình local: không lưu RSVP hoặc lời chúc. DesktopPanel chưa truy vấn lời chúc đã lưu. Muốn bật lưu thật cần cấu hình Supabase trên Vercel theo hướng dẫn ở trên.

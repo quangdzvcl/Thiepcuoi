@@ -11,7 +11,7 @@ export const wedding = {
   hero: '/images/wedding-2505-retouched.webp',
   portrait: '/images/wedding-2716-retouched.webp',
   footer: '/images/wedding-3350-retouched.webp',
-  eventPortrait: '/images/wedding-2517-retouched.webp',
+  eventPortrait: '/images/wedding-3208-retouched.webp',
   poem: ['Hữu duyên nên nghĩa vợ chồng,', 'Trăm năm giữ trọn tấm lòng cùng nhau.'],
   // Thời lượng lưu lịch mặc định 1 giờ; chưa phải giờ kết thúc tiệc được xác nhận.
   events: [
@@ -32,8 +32,8 @@ export const wedding = {
     { src: '/images/wedding-3208-retouched.webp', alt: 'Xuân Quang trong vest đen và Võ Hồng khoác tay nhau', wide: false, full: false },
   ],
   // Đặt file có quyền sử dụng tại public/music/wedding.mp3 rồi đổi thành '/music/wedding.mp3'.
-  music: '/music/a-kind-of-hope-mobile.mp3',
-  musicCredit: { title: 'A Kind Of Hope', artist: 'Scott Buckley', url: 'https://www.scottbuckley.com.au/library/a-kind-of-hope/', licenseUrl: 'https://creativecommons.org/licenses/by/4.0/' },
+  music: 'https://assets.cinelove.me/audio/e8d2b253-a0f4-4cdd-aa85-4750c0a1bf27/11ce7424-185c-4e3d-94a7-14831833258e.mp3',
+  musicCredit: { title: 'Nhạc nền từ mẫu CineLove', url: 'https://cinelove.me/showcase/UacO5aGi6UUsa161Ei56OJhTOGT5Ga610' },
   gifts: [
     { role: 'Chú rể', name: 'XUAN QUANG', bank: 'Vietcombank', account: '0123456789', qr: '' },
     { role: 'Cô dâu', name: 'VO HONG', bank: 'Techcombank', account: '0987654321', qr: '' },

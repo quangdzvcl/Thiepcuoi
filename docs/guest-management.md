@@ -2,11 +2,11 @@
 
 ## Trạng thái triển khai
 
-Mã nguồn đã có luồng lưu Supabase và trang `/quan-ly`. Đây không phải xác nhận rằng dự án Supabase đã được tạo hoặc biến môi trường Production đã được cấu hình. Chỉ bật `RSVP_PROVIDER=supabase` sau khi chạy SQL và kiểm tra quyền truy cập. Không thể khôi phục các lần gửi trước đây ở chế độ demo vì chúng chưa từng được lưu.
+Production đã kết nối Supabase thật ngày 19/11/2026. Dự án riêng `thiepcuoi-xuanquang-vohong` (ref `vorijznzpyiwpthzjmgs`), nhóm `quangdzvcl's Org`, vùng Singapore. Bốn biến môi trường Production đã được đặt trên đúng dự án Vercel `thiepcuoi-w53i`; khóa server được lưu dưới dạng Secret, không ở mã nguồn. Tài khoản Auth của chủ thiệp đã được tạo, xác minh và chủ thiệp đã đăng nhập thành công vào `/quan-ly`. Không thể khôi phục các lần gửi trước đây ở chế độ demo vì chúng chưa từng được lưu.
 
 ## Cấu hình Supabase
 
-1. Dùng dự án riêng cho thiệp. Chạy toàn bộ `supabase/schema.sql` trong SQL Editor. File cập nhật bảng cũ mà không xóa RSVP đã có. Chưa tạo file migration mới vì cần xác định dự án đích trước.
+1. Dùng dự án riêng cho thiệp. Chạy toàn bộ `supabase/schema.sql` trong SQL Editor. File cập nhật bảng cũ mà không xóa RSVP đã có. Migration `wedding_rsvps_and_private_management` đã được áp dụng trên dự án thiệp cưới; nội dung tương ứng nằm trong file schema này.
 2. Tạo tài khoản dành cho chủ thiệp trong **Authentication → Users**. Địa chỉ email cần được xác minh; chủ thiệp tự đặt mật khẩu. Đây là tài khoản Auth bên trong dự án, khác tài khoản đăng nhập Dashboard Supabase.
 3. Trong Vercel → project `thiepcuoi-w53i` → Environment Variables, đặt cho Production:
 
@@ -53,3 +53,16 @@ npm run test:integration
 Integration test dùng backend HTTP giả lập tạm trên localhost để kiểm tra quyền truy cập, CSRF, lưu form, chống retry trùng, đồng ý công khai, duyệt/ẩn và danh sách khách. Nó không kết nối Supabase thật và không chứng minh biến môi trường Production đã đúng. Chỉ kiểm tra thực tế bước trên mới xác nhận hoàn tất kết nối.
 
 Tài liệu: [Supabase API keys](https://supabase.com/docs/guides/getting-started/api-keys), [Securing your API](https://supabase.com/docs/guides/api/securing-your-api), [Next.js authentication](https://nextjs.org/docs/app/guides/authentication).
+
+
+## Bằng chứng kiểm tra Production 19/11/2026
+
+- Redeploy `dpl_324vUfcQ5W7hsJqjhJdKUZqSr1mP` đạt READY và phục vụ tên miền chính, dùng commit `a932c70`.
+- Gửi form thật từ trình duyệt: Supabase lưu đúng một phản hồi thử, `attendance=yes`, `guests=2`, đồng ý chia sẻ lời chúc nhưng mặc định chưa duyệt. UI báo đã nhận thật, không có cờ demo.
+- Chủ thiệp tự đặt mật khẩu và đăng nhập; trang quản lý hiển thị đúng phản hồi cùng tổng hai người và một lời chúc chờ duyệt.
+- API lời chúc công khai ban đầu không có bản ghi thử; bấm duyệt trong trang quản lý thì tên/lời chúc hiện trên thiệp. Bấm ẩn lại thì API công khai trở về rỗng. API chỉ trả bốn trường công khai.
+- API khách riêng và đọc trực tiếp bảng bằng publishable key đều từ chối người chưa đăng nhập (401). Bảng bật RLS, anon/authenticated không có quyền đọc bảng hoặc gọi RPC thống kê.
+- Thông báo INFO “RLS Enabled No Policy” là chủ ý của thiết kế chỉ-server, không phải yêu cầu mở policy public: https://supabase.com/docs/guides/database/database-linter?lint=0008_rls_enabled_no_policy.
+- Nút xuất CSV hoàn tất thao tác trên UI; việc lấy tệp bằng công cụ tải tự động bị gián đoạn nên chưa xác minh nội dung tệp tải thực tế. Bộ chuyển CSV và chống công thức đã qua unit test.
+- Chủ thiệp đã đồng ý xóa bản ghi thử; đã xóa đúng UUID và submission_id của bản ghi có điện thoại 0000000000. Sau dọn không còn khách thử.
+- Phiên đăng nhập tối đa một giờ. Sau khi hết hạn, trang quản lý yêu cầu đăng nhập lại và không tiếp tục trả dữ liệu riêng.

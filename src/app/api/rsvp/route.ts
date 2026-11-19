@@ -20,7 +20,7 @@ export async function POST(request: Request) {
   const { website: _honeypot, ...data } = result.data;
   void _honeypot;
   try {
-    const response = await supabaseFetch('/rest/v1/rsvps?on_conflict=submission_id', { method: 'POST', headers: { 'Content-Type': 'application/json', Prefer: 'resolution=ignore-duplicates,return=minimal' }, body: JSON.stringify({ ...data, submission_id: data.submission_id ?? crypto.randomUUID(), guests: data.attendance === 'no' ? 0 : data.guests }) });
+    const response = await supabaseFetch('/rest/v1/rsvps?on_conflict=submission_id', { method: 'POST', headers: { 'Content-Type': 'application/json', Prefer: 'resolution=ignore-duplicates,return=minimal' }, body: JSON.stringify({ ...data, wish_approved: data.publish_wish, submission_id: data.submission_id ?? crypto.randomUUID(), guests: data.attendance === 'no' ? 0 : data.guests }) });
     if (!response.ok) throw new Error('Storage rejected request');
     return NextResponse.json({ demo: false, message: 'Chúng mình đã nhận được xác nhận và lời chúc của bạn. Cảm ơn bạn thật nhiều!' }, { status: 201 });
   } catch { return NextResponse.json({ message: 'Chưa gửi được xác nhận. Bạn vui lòng thử lại sau.' }, { status: 502 }); }

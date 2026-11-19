@@ -13,6 +13,8 @@ import RibbonBow from './ribbon-bow';
 import OpeningHearts from './opening-hearts';
 import DesktopPanel from './desktop-panel';
 import GuestWishes from './guest-wishes';
+import { WishesProvider } from './wishes-provider';
+import FloatingWishes from './floating-wishes';
 import { useAutoScroll } from './use-auto-scroll';
 
 function calendarLink(event: typeof w.events[number]) {
@@ -78,7 +80,7 @@ export default function WeddingPage() {
       else { await navigator.clipboard.writeText(url); setToast('Đã sao chép đường dẫn thiệp cưới.'); }
     } catch (error) { if (!(error instanceof DOMException && error.name === 'AbortError')) setToast(`Đường dẫn thiệp: ${url}`); }
   }
-  return <MotionConfig reducedMotion="user">
+  return <MotionConfig reducedMotion="user"><WishesProvider active={opened}>
     <RevealProvider active={opened}><div className={`wedding-shell${reading.active ? ' auto-reading' : ''}`} inert={!opened} aria-hidden={!opened}>
       <a className="skip-link" href="#main-content">Đến nội dung chính</a>
       <DesktopPanel onInteract={reading.pause} />
@@ -107,6 +109,7 @@ export default function WeddingPage() {
         <footer className="wedding-footer"><img className="footer-photo" src={w.footer} alt={`${w.groom} và ${w.bride} cùng nâng khăn voan trắng`} width={1400} height={2100} loading="lazy" /><img className="footer-thanks" src="/images/decorations/thanks-title.png" alt="THANKS" width={312} height={87} loading="lazy" /></footer>
       </main>
       <div className="card-scroll-controls"><button aria-label="Cuộn thiệp lên" onClick={() => { reading.pause(); main.current?.scrollBy({ top: -500, behavior: 'smooth' }); }}><ArrowUp size={20} /></button><button aria-label="Cuộn thiệp xuống" onClick={() => { reading.pause(); main.current?.scrollBy({ top: 500, behavior: 'smooth' }); }}><ArrowDown size={20} /></button></div><nav className="quick-actions" onClickCapture={reading.pause} aria-label="Tiện ích thiệp cưới"><a href="#rsvp"><MessageCircleHeart size={20} /><span>Gửi lời chúc…</span></a><a href="#gallery"><Images size={20} /><span>Album</span></a><button onClick={() => setGiftsOpen(true)}><Gift size={20} /><span>Mừng cưới</span></button><button onClick={() => void share()}><Share2 size={20} /><span>Chia sẻ</span></button></nav>
+      {opened && <FloatingWishes suspended={giftsOpen || image !== null} />}
       {opened && !reading.reduced && <button className={`auto-scroll-button${reading.active ? ' is-running' : ''}`} aria-label={reading.active ? 'Tạm dừng tự cuộn' : 'Tiếp tục tự cuộn'} onClick={reading.active ? reading.pause : reading.resume}><img src="/images/decorations/auto-scroll-play.png" alt="" width={40} height={40} /></button>}
       <button className={`music-button${playing ? ' playing' : ''}`} aria-label={!w.music ? 'Chưa có nhạc nền' : playing ? 'Tắt nhạc nền' : 'Bật nhạc nền'} aria-pressed={playing} disabled={!w.music} onClick={() => { if (playing) { audio.current?.pause(); setPlaying(false); } else void play(); }}><img src="/images/decorations/music-icon.png" alt="" width={24} height={24} />{!playing && <span className="music-muted-line" aria-hidden="true" />}</button>
       {toast && <p className="toast-message" role="status">{toast}</p>}
@@ -116,5 +119,5 @@ export default function WeddingPage() {
     {openingHearts && <OpeningHearts onComplete={() => setOpeningHearts(false)} />}
     {image !== null && <Lightbox index={image} close={() => setImage(null)} change={setImage} />}
     {giftsOpen && <GiftDialog close={() => setGiftsOpen(false)} />}
-  </MotionConfig>;
+  </WishesProvider></MotionConfig>;
 }

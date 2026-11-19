@@ -181,6 +181,19 @@ h1 i { font-size:25px; font-weight:400; }
 .guest-wishes li time { font-size:10px; color:#82756e; }
 .wishes-empty { color:#8c7f77; font:12px/1.7 Arial,sans-serif; text-align:center; }
 .wish-more { margin:14px auto; display:block; color:var(--wine); font-size:12px; padding:8px; }
+.floating-wishes { position:fixed; z-index:35; left:16px; bottom:calc(58px + env(safe-area-inset-bottom)); width:min(285px,calc(100vw - 84px)); pointer-events:none; }
+.floating-wishes-window { height:180px; overflow:hidden; mask-image:linear-gradient(transparent 0px,#000 28px); }
+.floating-wishes-track { animation:wedding-wishes-rise var(--wish-duration,6s) linear infinite; will-change:transform; }
+.floating-wishes-group { min-height:180px; padding-top:40px; padding-bottom:7px; display:flex; flex-direction:column; align-items:flex-start; gap:7px; }
+.floating-wish { max-width:100%; padding:7px 10px; border-radius:5px; background:rgba(225,117,117,.5); color:white; font:11px/14px -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif; overflow-wrap:anywhere; text-shadow:0 1px 2px #a3444460; }
+.floating-wish>span { display:-webkit-box; -webkit-box-orient:vertical; -webkit-line-clamp:2; overflow:hidden; }
+.floating-wishes-toggle { position:absolute; right:-2px; top:8px; z-index:1; display:flex; justify-content:center; align-items:center; width:24px; height:24px; border-radius:50%; border:1px solid #e8cbcb; background:#fffc; color:var(--wine); pointer-events:auto; }
+.floating-wishes.is-collapsed { width:28px; height:28px; }.floating-wishes.is-collapsed .floating-wishes-toggle { inset:0; width:28px; height:28px; }
+.floating-wishes.is-reduced .floating-wishes-track { animation:none; transform:none; }.floating-wishes.is-reduced .floating-wishes-group:nth-child(2) { display:none; }
+body:has(dialog[open]) .floating-wishes { visibility:hidden; }
+@keyframes wedding-wishes-rise { to { transform:translateY(-50%); } }
+@media(min-width:641px) { .floating-wishes { left:calc(var(--stage-center) - var(--invitation-width) / 2 + 16px); bottom:74px; width:min(285px,calc(var(--invitation-width) - 80px)); } }
+@media(prefers-reduced-motion:reduce) { .floating-wishes-track { animation:none; transform:none; }.floating-wishes-group:nth-child(2) { display:none; } }
 @media(min-width:1000px) { .desktop-wishes-panel .guest-wishes { max-height:50dvh; overflow:auto; padding:0 12px; }.guest-wishes-section { display:none; } }
 .form-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
 .rsvp-form label { display:flex; flex-direction:column; gap:7px; font-size:10px; color:#5f4e47; }

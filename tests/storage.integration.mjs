@@ -13,9 +13,9 @@ const mock = createServer(async (req, res) => {
   if (req.headers.apikey !== 'sb_secret_local_test') return json(res, 401, {});
   if (url.pathname === '/auth/v1/token') return json(res, 200, { access_token: adminToken, expires_in: 3600, user: { email: 'owner@example.com', email_confirmed_at: '2026-11-19T00:00:00Z' } });
   if (url.pathname === '/auth/v1/user') return req.headers.authorization === `Bearer ${adminToken}` ? json(res, 200, { email: 'owner@example.com', email_confirmed_at: '2026-11-19T00:00:00Z' }) : json(res, 401, {});
-  if (url.pathname === '/rest/v1/rpc/wedding_rsvp_stats') return json(res, 200, { responses: rows.length, accepted: rows.filter(r => r.attendance === 'yes').length, declined: 0, maybe: 0, attendees: rows.reduce((n, r) => n + r.guests, 0), groom_attendees: 2, bride_attendees: 0, pending_wishes: rows.filter(r => r.publish_wish && !r.wish_approved).length });
+  if (url.pathname === '/rest/v1/rpc/wedding_rsvp_stats') return json(res, 200, { responses: rows.length, accepted: rows.filter(r => r.attendance === 'yes').length, declined: 0, maybe: 0, attendees: rows.reduce((n, r) => n + r.guests, 0), groom_attendees: 2, bride_attendees: 0, published_wishes: rows.filter(r => r.publish_wish && r.wish_approved).length, pending_wishes: 0 });
   if (url.pathname === '/rest/v1/rsvps') {
-    if (req.method === 'POST') { const data = JSON.parse(raw); if (!rows.some(row => row.submission_id === data.submission_id)) rows.push({ ...data, id: crypto.randomUUID(), created_at: new Date().toISOString(), wish_approved: false }); return json(res, 201, {}); }
+    if (req.method === 'POST') { const data = JSON.parse(raw); if (!rows.some(row => row.submission_id === data.submission_id)) rows.push({ ...data, id: crypto.randomUUID(), created_at: new Date().toISOString(), wish_approved: data.wish_approved ?? true }); return json(res, 201, {}); }
     let selected = rows.filter(row => [...url.searchParams].every(([key, value]) => {
       if (!['id', 'attendance', 'side', 'publish_wish', 'wish_approved'].includes(key)) return true;
       return value === `eq.${String(row[key])}`;
@@ -48,18 +48,21 @@ try {
   assert.equal((await request('/api/rsvp', { method: 'POST', headers: { Origin: 'https://other.example' }, body: JSON.stringify(guest) })).status, 403);
   for (let attempt = 0; attempt < 2; attempt++) assert.equal((await request('/api/rsvp', { method: 'POST', body: JSON.stringify(guest) })).status, 201);
   assert.equal(rows.length, 1, 'retry keeps the same submission ID');
-  assert.deepEqual((await (await request('/api/wishes')).json()).wishes, [], 'pending wishes stay private');
+  assert.equal((await (await request('/api/wishes')).json()).wishes.length, 1, 'public consent publishes immediately without moderation');
   assert.equal((await request(`/api/admin/rsvps/${rows[0].id}`, { method: 'PATCH', body: '{"approved":true}' })).status, 401);
   assert.equal((await request(`/api/admin/rsvps/${rows[0].id}`, { method: 'PATCH', headers: auth, body: '{"approved":true}' })).status, 200);
   const published = await (await request('/api/wishes')).json();
   assert.equal(published.wishes.length, 1); assert.deepEqual(Object.keys(published.wishes[0]).sort(), ['created_at', 'id', 'name', 'wishes']);
-  const privateGuest = { ...guest, submission_id: crypto.randomUUID(), publish_wish: false };
+  assert.equal((await request(`/api/admin/rsvps/${rows[0].id}`, { method: 'PATCH', headers: auth, body: '{"approved":false}' })).status, 200);
+  assert.equal((await (await request('/api/wishes')).json()).wishes.length, 0, 'owner can still hide an automatically published wish');
+  const privateGuest = { ...guest, submission_id: crypto.randomUUID(), publish_wish: false, wish_approved: true };
   await request('/api/rsvp', { method: 'POST', body: JSON.stringify(privateGuest) });
+  assert.equal((await (await request('/api/wishes')).json()).wishes.length, 0, 'opting out stays private even with a forged visibility field');
   assert.equal((await request(`/api/admin/rsvps/${rows[1].id}`, { method: 'PATCH', headers: auth, body: '{"approved":true}' })).status, 409, 'cannot publish without guest consent');
   const guests = await (await request('/api/admin/rsvps?attendance=yes', { headers: auth })).json();
   assert.equal(guests.total, 2); assert.equal(guests.stats.attendees, 4); assert.equal(guests.guests[0].phone, guest.phone);
   assert.equal((await request('/api/admin/session', { method: 'DELETE', headers: auth })).status, 200);
-  console.log('PASS: private guest list, session checks, CSRF, idempotency, consent, moderation, public field projection, counts, logout. No real guest data written.');
+  console.log('PASS: private guest list, session checks, CSRF, idempotency, automatic publication, opt-out privacy, owner hide controls, public field projection, counts, logout. No real guest data written.');
 } finally {
   app.kill(); mock.closeAllConnections(); await new Promise(resolve => mock.close(resolve));
 }

@@ -9,7 +9,8 @@ create table if not exists public.rsvps (
   wishes text not null default '' check (char_length(wishes) <= 1500)
 );
 alter table public.rsvps add column if not exists publish_wish boolean not null default false;
-alter table public.rsvps add column if not exists wish_approved boolean not null default false;
+alter table public.rsvps add column if not exists wish_approved boolean not null default true;
+alter table public.rsvps alter column wish_approved set default true;
 alter table public.rsvps add column if not exists submission_id uuid;
 create unique index if not exists rsvps_submission_id_key on public.rsvps(submission_id);
 create index if not exists rsvps_created_at_idx on public.rsvps(created_at desc);
@@ -28,6 +29,7 @@ returns jsonb language sql stable security invoker set search_path = '' as $$
     'attendees', coalesce(sum(guests) filter (where attendance = 'yes'), 0),
     'groom_attendees', coalesce(sum(guests) filter (where attendance = 'yes' and side = 'groom'), 0),
     'bride_attendees', coalesce(sum(guests) filter (where attendance = 'yes' and side = 'bride'), 0),
+    'published_wishes', count(*) filter (where publish_wish and wish_approved and wishes <> ''),
     'pending_wishes', count(*) filter (where publish_wish and not wish_approved and wishes <> '')
   ) from public.rsvps;
 $$;

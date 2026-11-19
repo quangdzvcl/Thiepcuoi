@@ -165,5 +165,7 @@ Tự cuộn đã đối chiếu bằng hai lần đo khi không thao tác trên 
 RSVP_PROVIDER=demo trong cấu hình local: không lưu RSVP hoặc lời chúc. DesktopPanel chưa truy vấn lời chúc đã lưu. Muốn bật lưu thật cần cấu hình Supabase trên Vercel theo hướng dẫn ở trên.
 
 
-### Quản lý khách mời và duyệt lời chúc
-Xem [hướng dẫn cấu hình và kiểm tra](docs/guest-management.md). Trang /quan-ly dùng Supabase Auth, chỉ email quản lý đã xác minh trong SUPABASE_ADMIN_EMAILS được xem điện thoại, xác nhận, tổng khách và xuất CSV. Lời chúc được lưu cùng RSVP; chỉ công khai khi khách đồng ý và gia đình duyệt. Chưa cấu hình Supabase thì vẫn là demo, không lưu thật.
+### Quản lý khách mời và lời chúc
+Xem [hướng dẫn cấu hình và kiểm tra](docs/guest-management.md). Trang /quan-ly dùng Supabase Auth, chỉ email quản lý đã xác minh trong SUPABASE_ADMIN_EMAILS được xem điện thoại, xác nhận, tổng khách và xuất CSV. Lời chúc được lưu cùng RSVP; tự công khai ngay khi gửi nếu khách chọn chia sẻ (tick sẵn, có thể bỏ tick); gia đình vẫn có thể ẩn lại. Chưa cấu hình Supabase thì vẫn là demo, không lưu thật.
+
+Lời chúc có bong bóng hồng chạy lên theo mẫu, nút ẩn/hiện và bản tĩnh cho thiết bị giảm chuyển động. Cập nhật ngay sau gửi thành công, đồng bộ các tab xem khác khoảng 10 giây.

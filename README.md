@@ -107,7 +107,7 @@ SUPABASE_SECRET_KEY=sb_secret_YOUR_SECRET
 4. Khởi động lại server. Gửi form thử, kiểm tra bản ghi trong Table Editor → `rsvps`. Thành công mới hiển thị xác nhận và confetti. Khách không tham dự được lưu với `guests=0`; số khách còn lại là tổng người gồm chính khách gửi.
 5. Trên Vercel khai báo cùng ba biến môi trường, chọn Production và Preview nếu muốn lưu ở cả hai, rồi redeploy. Có thể dùng project Supabase riêng cho Preview để tránh lẫn dữ liệu thử.
 
-Bảng bật RLS và chặn đọc/ghi từ khóa public; chỉ server giữ secret thực hiện insert. API kiểm tra kiểu dữ liệu, giới hạn độ dài, số khách, honeypot và nguồn gửi từ trình duyệt. Không log dữ liệu cá nhân. Đây là form công khai: honeypot không thay thế rate limit; nếu chia sẻ rộng hãy cấu hình rate limiting tại Vercel Firewall hoặc thêm CAPTCHA phía server. Hiện chưa có chống gửi trùng/lưu idempotency, nên khách có thể gửi nhiều lần từ nhiều lần tải trang. Bảo quản dữ liệu và xóa khi không còn cần cho lễ cưới.
+Bảng bật RLS và chặn đọc/ghi từ khóa public; chỉ server giữ secret thực hiện insert. API kiểm tra kiểu dữ liệu, giới hạn độ dài, số khách, honeypot và nguồn gửi từ trình duyệt. Không log dữ liệu cá nhân. Đây là form công khai: honeypot không thay thế rate limit; nếu chia sẻ rộng hãy cấu hình rate limiting tại Vercel Firewall hoặc thêm CAPTCHA phía server. Có chống retry trùng bằng submission_id; việc gửi lại từ lần tải trang mới vẫn là phản hồi mới. Bảo quản dữ liệu và xóa khi không còn cần cho lễ cưới.
 
 API không ghi file JSON trên Vercel vì filesystem không phải kho lưu bền vững. Chế độ Supabase bị cấu hình thiếu sẽ trả 503, không tự chuyển sang demo và làm mất xác nhận.
 
@@ -163,3 +163,7 @@ Tự cuộn đã đối chiếu bằng hai lần đo khi không thao tác trên 
 ### Cập nhật 19/11/2026
 Ảnh vòm dùng wedding-3208-retouched.webp. Nhạc đang trỏ đến đúng audio của mẫu CineLove; nguồn bên ngoài có thể thay đổi. File A Kind Of Hope còn trong public/music là phương án dự phòng có giấy phép, không phải bài đang phát. Thông tin CC BY của file dự phòng không áp dụng cho nhạc CineLove.
 RSVP_PROVIDER=demo trong cấu hình local: không lưu RSVP hoặc lời chúc. DesktopPanel chưa truy vấn lời chúc đã lưu. Muốn bật lưu thật cần cấu hình Supabase trên Vercel theo hướng dẫn ở trên.
+
+
+### Quản lý khách mời và duyệt lời chúc
+Xem [hướng dẫn cấu hình và kiểm tra](docs/guest-management.md). Trang /quan-ly dùng Supabase Auth, chỉ email quản lý đã xác minh trong SUPABASE_ADMIN_EMAILS được xem điện thoại, xác nhận, tổng khách và xuất CSV. Lời chúc được lưu cùng RSVP; chỉ công khai khi khách đồng ý và gia đình duyệt. Chưa cấu hình Supabase thì vẫn là demo, không lưu thật.

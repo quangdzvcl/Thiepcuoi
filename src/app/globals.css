@@ -169,6 +169,19 @@ h1 i { font-size:25px; font-weight:400; }
 .rsvp-section .ribbon-bow { width:80px; height:55px; margin-bottom:15px; }
 .rsvp-card { margin:27px auto 0; background:white; padding:27px; border:1px solid #ead6d2; box-shadow:0 6px 22px #6a172106; text-align:left; }
 .rsvp-form { display:flex; flex-direction:column; gap:16px; }
+.rsvp-form .publish-wish-choice { flex-direction:row; align-items:flex-start; gap:8px; }
+.rsvp-form .publish-wish-choice input { min-height:18px; width:18px; height:18px; flex-shrink:0; margin-top:2px; }
+.guest-wishes-section { padding-top:26px; padding-bottom:26px; }
+.guest-wishes { width:100%; text-align:left; }
+.guest-wishes h2 { font-size:23px; text-align:center; margin-bottom:20px; color:var(--wine); }
+.guest-wishes ul { list-style:none; padding:0; margin:0; display:grid; gap:12px; }
+.guest-wishes li { padding:14px; background:#faf5f2; border:1px solid #efe5df; border-radius:10px; font-family:Arial,sans-serif; font-size:12px; overflow-wrap:anywhere; }
+.guest-wishes li strong { color:var(--wine); }
+.guest-wishes li p { white-space:pre-wrap; font-size:12px; line-height:1.7; margin:7px 0; }
+.guest-wishes li time { font-size:10px; color:#82756e; }
+.wishes-empty { color:#8c7f77; font:12px/1.7 Arial,sans-serif; text-align:center; }
+.wish-more { margin:14px auto; display:block; color:var(--wine); font-size:12px; padding:8px; }
+@media(min-width:1000px) { .desktop-wishes-panel .guest-wishes { max-height:50dvh; overflow:auto; padding:0 12px; }.guest-wishes-section { display:none; } }
 .form-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
 .rsvp-form label { display:flex; flex-direction:column; gap:7px; font-size:10px; color:#5f4e47; }
 .rsvp-form label>span { display:contents; color:var(--wine); }

@@ -12,6 +12,7 @@ import Envelope from './envelope';
 import RibbonBow from './ribbon-bow';
 import OpeningHearts from './opening-hearts';
 import DesktopPanel from './desktop-panel';
+import GuestWishes from './guest-wishes';
 import { useAutoScroll } from './use-auto-scroll';
 
 function calendarLink(event: typeof w.events[number]) {
@@ -99,6 +100,7 @@ export default function WeddingPage() {
         <section className="event-portrait-section"><Reveal effect="zoom"><div className="event-portrait"><img className="welcome-arch" src="/images/decorations/welcome-arch.png" alt="Welcome to our wedding" width={546} height={138} /><img className="event-portrait-photo" src={w.eventPortrait} alt={`${w.groom} và ${w.bride} trong ngày chụp ảnh cưới`} width={1400} height={2100} loading="lazy" /></div><p className="wedding-poem">{w.poem[0]}<br />{w.poem[1]}</p></Reveal></section>
         <section className="journey-section"><Reveal effect="fade"><img className="address-title" src="/images/decorations/address-title.png" alt="ADDRESS" width={260} height={66} loading="lazy" /><Journey /><div className="countdown-row"><img src="/images/decorations/wedding-car.png" alt="" width={180} height={108} loading="lazy" /><Countdown /></div></Reveal></section>
         <section className="rsvp-section" id="rsvp" aria-label="Xác nhận tham dự và lời chúc"><div className="rsvp-illustrations"><button onClick={() => setGiftsOpen(true)} aria-label="Mở hộp mừng cưới"><img src="/images/decorations/wedding-gift.png" alt="" width={114} height={114} loading="lazy" /></button><img className="rsvp-couple" src="/images/decorations/wedding-couple.png" alt="" width={244} height={286} loading="lazy" /></div><Reveal className="rsvp-card" effect="fade"><h2>Xác nhận tham dự</h2><CompactRSVP /></Reveal></section>
+        <section className="guest-wishes-section section-pad"><GuestWishes /></section>
         <section className="album-section section-pad" id="gallery"><Reveal><h2 className="section-title soft-pulse">Album ảnh</h2></Reveal><div className="photo-grid">{w.gallery.map((photo, i) => <Reveal key={photo.src} effect="zoom" delay={i % 2 * 0.12} className={`gallery-item${photo.wide ? ' gallery-item-landscape' : photo.full ? ' gallery-item-feature' : ''}`}><button onClick={() => setImage(i)} aria-label={`Phóng to: ${photo.alt}`}><img src={photo.src} alt={photo.alt} width={photo.wide ? 1600 : 1400} height={photo.wide ? 1067 : 2100} loading="lazy" /></button></Reveal>)}</div></section>
 
 

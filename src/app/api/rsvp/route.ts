@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { rsvpSchema } from '@/lib/rsvp';
+import { supabaseFetch } from '@/lib/supabase';
 export const runtime = 'nodejs';
 export async function POST(request: Request) {
   const origin = request.headers.get('origin');
@@ -19,7 +20,7 @@ export async function POST(request: Request) {
   const { website: _honeypot, ...data } = result.data;
   void _honeypot;
   try {
-    const response = await fetch(`${process.env.SUPABASE_URL.replace(/\/$/, '')}/rest/v1/rsvps`, { method: 'POST', headers: { apikey: process.env.SUPABASE_SECRET_KEY, 'Content-Type': 'application/json', Prefer: 'return=minimal' }, body: JSON.stringify({ ...data, guests: data.attendance === 'no' ? 0 : data.guests }), signal: AbortSignal.timeout(10000), cache: 'no-store' });
+    const response = await supabaseFetch('/rest/v1/rsvps?on_conflict=submission_id', { method: 'POST', headers: { 'Content-Type': 'application/json', Prefer: 'resolution=ignore-duplicates,return=minimal' }, body: JSON.stringify({ ...data, submission_id: data.submission_id ?? crypto.randomUUID(), guests: data.attendance === 'no' ? 0 : data.guests }) });
     if (!response.ok) throw new Error('Storage rejected request');
     return NextResponse.json({ demo: false, message: 'Chúng mình đã nhận được xác nhận và lời chúc của bạn. Cảm ơn bạn thật nhiều!' }, { status: 201 });
   } catch { return NextResponse.json({ message: 'Chưa gửi được xác nhận. Bạn vui lòng thử lại sau.' }, { status: 502 }); }

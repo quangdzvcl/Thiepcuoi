@@ -535,11 +535,14 @@ h1 { margin:0; line-height:1.42; gap:calc(var(--invitation-width) * .045); }
 .gallery-item { grid-column:span 3; }
 .gallery-item:nth-child(3),.gallery-item:nth-child(4),.gallery-item:nth-child(5) { grid-column:span 2; }
 .gallery-item:nth-child(6),.gallery-item:nth-child(9),.gallery-item:nth-child(10),.gallery-item:nth-child(11) { grid-column:span 3; }
-.gallery-item-landscape,.gallery-item-feature,.gallery-item:nth-child(6).gallery-item-feature,.gallery-item:nth-child(9).gallery-item-landscape { grid-column:span 6; }
+.photo-grid .gallery-item.gallery-item-landscape,.photo-grid .gallery-item.gallery-item-feature { grid-column:span 6; }
 .gallery-item button { box-shadow:0 3px 7px #0002; }
-.wedding-footer { display:block; min-height:0; height:calc(var(--invitation-width) * 1.5); margin-top:12px; }
+.wedding-footer { display:block; min-height:0; height:auto; margin-top:12px; }
 .wedding-footer>.footer-photo { height:100%; }
 .wedding-footer>.footer-thanks { position:absolute; top:auto; bottom:calc(var(--invitation-width) * .075); left:50%; transform:translateX(-50%); width:calc(var(--invitation-width) * .4); height:auto; object-fit:contain; }
+.closing-note { padding:34px 28px 110px; text-align:center; background:#fdfbf7; color:var(--wine); }
+.closing-note>svg { margin:0 auto 16px; color:#b78d53; }
+.closing-note>p { max-width:30ch; margin:auto; font-family:var(--font-serif),Georgia,serif; font-size:clamp(16px,calc(var(--invitation-width) * .046),21px); line-height:1.8; text-wrap:pretty; }
 .music-credit { text-align:center; font-size:9px; line-height:1.6; padding:10px 18px 80px; color:#777; }
 .music-credit a { text-decoration:underline; text-underline-offset:2px; }
 .music-button { width:32px; height:32px; border:1px solid #bd8585; box-shadow:inset 0 0 0 2px #fff8,0 0 0 2px white; }

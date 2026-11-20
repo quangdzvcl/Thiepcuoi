@@ -10,9 +10,12 @@ export const wedding = {
   invitation: 'Có những cuộc gặp gỡ là duyên, có những hành trình là định mệnh. Sau những năm tháng cùng nhau lớn lên, chúng mình đã sẵn sàng viết chương mới của cuộc đời. Sự hiện diện của bạn sẽ là món quà quý giá nhất trong ngày đặc biệt ấy.',
   hero: '/images/wedding-2505-retouched.webp',
   portrait: '/images/wedding-2716-retouched.webp',
-  footer: '/images/wedding-3350-retouched.webp',
+  footer: '/images/wedding-2740-retouched.webp',
+  footerAlt: 'Xuân Quang và Võ Hồng trao nhau ánh nhìn trong trang phục vest trắng và váy cưới',
+  footerAspectRatio: '3 / 2',
   eventPortrait: '/images/wedding-3208-retouched.webp',
   poem: ['Hữu duyên nên nghĩa vợ chồng,', 'Trăm năm giữ trọn tấm lòng cùng nhau.'],
+  closingMessage: 'Sự hiện diện của Quý khách là niềm vinh hạnh của gia đình chúng tôi.',
   // Thời lượng lưu lịch mặc định 1 giờ; chưa phải giờ kết thúc tiệc được xác nhận.
   events: [
     { title: 'Tiệc Cưới Nhà Gái', subtitle: 'NHÀ GÁI', venue: 'Tư gia nhà gái', address: 'Thôn 10, xã Ea Nuôl, tỉnh Đắk Lắk', start: '2026-12-06T11:00:00+07:00', end: '2026-12-06T12:00:00+07:00', time: '11:00', day: 'Chủ Nhật, 06 tháng 12 năm 2026', lunarDay: 'Nhằm ngày 28 tháng 10 âm lịch', maps: 'https://maps.app.goo.gl/juzR4XVoHfzR9Q9k7' },
@@ -27,7 +30,7 @@ export const wedding = {
     { src: '/images/wedding-2716-retouched.webp', alt: 'Xuân Quang và Võ Hồng ôm nhau trong ánh sáng ấm áp', wide: false, full: true },
     { src: '/images/wedding-3023-retouched.webp', alt: 'Xuân Quang và Võ Hồng nhìn nhau trong trang phục áo dài', wide: false, full: false },
     { src: '/images/wedding-2942-retouched.webp', alt: 'Xuân Quang và Võ Hồng cùng quạt và phụ kiện cưới trên nền đỏ', wide: false, full: false },
-    { src: '/images/wedding-2740-retouched.webp', alt: 'Khoảnh khắc Xuân Quang và Võ Hồng gần bên nhau', wide: true, full: false },
+    { src: '/images/wedding-3350-retouched.webp', alt: 'Xuân Quang và Võ Hồng cùng nâng khăn voan trắng', wide: false, full: true },
     { src: '/images/wedding-3058-retouched.webp', alt: 'Xuân Quang và Võ Hồng tươi cười trong trang phục áo dài', wide: false, full: false },
     { src: '/images/wedding-3208-retouched.webp', alt: 'Xuân Quang trong vest đen và Võ Hồng khoác tay nhau', wide: false, full: false },
   ],

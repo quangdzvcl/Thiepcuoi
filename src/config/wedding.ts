@@ -38,7 +38,7 @@ export const wedding = {
   music: 'https://assets.cinelove.me/audio/e8d2b253-a0f4-4cdd-aa85-4750c0a1bf27/11ce7424-185c-4e3d-94a7-14831833258e.mp3',
   musicCredit: { title: 'Nhạc nền từ mẫu CineLove', url: 'https://cinelove.me/showcase/UacO5aGi6UUsa161Ei56OJhTOGT5Ga610' },
   gifts: [
-    { role: 'Chú rể', name: 'NGUYEN XUAN QUANG', bank: 'VIB', account: '008791126', qr: '/qr/groom-vib.png', qrWidth: 1170, qrHeight: 1638 },
-    { role: 'Cô dâu', name: 'VO THI HONG', bank: 'ACB', account: '35855837', qr: '/qr/bride-acb.png', qrWidth: 1179, qrHeight: 1576 },
+    { role: 'Chú rể', name: 'NGUYEN XUAN QUANG', bank: 'VIB', account: '008791126', qr: '/qr/groom-vib-code.svg', qrWidth: 767, qrHeight: 767 },
+    { role: 'Cô dâu', name: 'VO THI HONG', bank: 'ACB', account: '35855837', qr: '/qr/bride-acb-code.svg', qrWidth: 740, qrHeight: 740 },
   ],
 };

@@ -43,7 +43,7 @@ function GiftDialog({ close }: { close: () => void }) {
     <RibbonBow /><h2 id="gift-title">Gửi chút yêu thương</h2><p>Sự hiện diện của bạn là món quà quý giá nhất với chúng mình.</p>
     <div className="gift-grid">{w.gifts.map((gift, i) => <div className="gift-card" key={gift.role}>
       <span className="eyebrow">{gift.role}</span><h3>{i === 0 ? w.groom : w.bride}</h3>
-      {gift.qr ? <><img className="qr-image" src={gift.qr} alt={`VietQR ${gift.role}`} /><p>{gift.bank}</p><strong>{gift.name}</strong><span className="account-number">{gift.account}</span><button className="copy-button" onClick={() => void copy(gift.account, i)}>{copied === i ? <Check size={15} /> : <Copy size={15} />}{copied === i ? 'Đã sao chép' : 'Sao chép tài khoản'}</button></> : <div className="gift-pending"><Heart size={26} strokeWidth={1} /><p>Thông tin mừng cưới<br />sẽ được cập nhật.</p></div>}
+      {gift.qr ? <><a className="qr-image-link" href={gift.qr} target="_blank" rel="noreferrer" aria-label={`Xem QR ${gift.role.toLocaleLowerCase('vi')} kích thước đầy đủ`}><img className="qr-image" src={gift.qr} alt={`VietQR ${gift.role} — ${gift.bank}`} width={gift.qrWidth} height={gift.qrHeight} /><span>Xem QR kích thước đầy đủ</span></a><p>{gift.bank}</p><strong>{gift.name}</strong><span className="account-number">{gift.account}</span><button className="copy-button" onClick={() => void copy(gift.account, i)}>{copied === i ? <Check size={15} /> : <Copy size={15} />}{copied === i ? 'Đã sao chép' : 'Sao chép tài khoản'}</button></> : <div className="gift-pending"><Heart size={26} strokeWidth={1} /><p>Thông tin mừng cưới<br />sẽ được cập nhật.</p></div>}
     </div>)}</div><p className="copy-status" role="status">{status}</p>
   </dialog>;
 }

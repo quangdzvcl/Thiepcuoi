@@ -234,7 +234,7 @@ textarea { resize:vertical; }
 .lightbox figcaption { text-align:center; font-size:11px; line-height:1.8; margin-top:15px; }
 .lightbox-close { position:absolute; top:15px; right:20px; }
 .lightbox .icon-button { flex-shrink:0; color:white; }
-.gift-dialog { position:fixed; inset:0; width:560px; max-width:calc(100% - 28px); max-height:calc(100dvh - 40px); margin:auto; padding:28px 25px; overflow:auto; border:1px solid #e5d5cb; background:var(--paper); text-align:center; color:var(--ink); border-radius:8px; }
+.gift-dialog { position:fixed; inset:0; width:720px; max-width:calc(100% - 28px); max-height:calc(100dvh - 40px); margin:auto; padding:28px 25px; overflow:auto; border:1px solid #e5d5cb; background:var(--paper); text-align:center; color:var(--ink); border-radius:8px; }
 .gift-dialog::backdrop { background:#281c1d99; backdrop-filter:blur(3px); }
 .dialog-close { position:absolute; top:3px; right:3px; }
 .gift-dialog>.ribbon-bow { width:75px; height:50px; }
@@ -245,7 +245,10 @@ textarea { resize:vertical; }
 .gift-card .eyebrow { font-size:8px; margin-bottom:6px; letter-spacing:1.5px; }
 .gift-card h3 { font-family:var(--font-wedding-script),cursive; font-size:29px; color:var(--wine); }
 .gift-card p,.gift-card strong { font-size:10px; }
-.qr-image { width:160px; max-width:100%; aspect-ratio:1; object-fit:contain; margin:15px auto; }
+.qr-image-link { display:block; width:280px; max-width:100%; margin:15px auto; }
+.qr-image { display:block; width:100%; height:auto; object-fit:contain; }
+.qr-image-link>span { display:block; margin-top:8px; font-size:10px; text-decoration:underline; text-underline-offset:3px; }
+@media(max-width:640px) { .gift-grid { grid-template-columns:1fr; } }
 .gift-pending { padding:30px 0 12px; }
 .gift-pending>svg { margin:0 auto 14px; color:#b2887c; }
 .account-number { display:block; font-size:14px; letter-spacing:1px; margin:7px 0; }

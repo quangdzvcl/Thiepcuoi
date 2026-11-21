@@ -1,4 +1,4 @@
-// Thông tin gia đình, giờ tiệc và bản đồ đã xác nhận. Ngân hàng chưa được cập nhật.
+// Thông tin gia đình, giờ tiệc, bản đồ và QR mừng cưới đã được cập nhật.
 export const wedding = {
   groom: 'Xuân Quang', bride: 'Võ Hồng', initials: 'Q & H',
   date: '2026-12-06T11:00:00+07:00', dateLabel: '06 & 12.12.2026',
@@ -38,7 +38,7 @@ export const wedding = {
   music: 'https://assets.cinelove.me/audio/e8d2b253-a0f4-4cdd-aa85-4750c0a1bf27/11ce7424-185c-4e3d-94a7-14831833258e.mp3',
   musicCredit: { title: 'Nhạc nền từ mẫu CineLove', url: 'https://cinelove.me/showcase/UacO5aGi6UUsa161Ei56OJhTOGT5Ga610' },
   gifts: [
-    { role: 'Chú rể', name: 'XUAN QUANG', bank: 'Vietcombank', account: '0123456789', qr: '' },
-    { role: 'Cô dâu', name: 'VO HONG', bank: 'Techcombank', account: '0987654321', qr: '' },
+    { role: 'Chú rể', name: 'NGUYEN XUAN QUANG', bank: 'VIB', account: '008791126', qr: '/qr/groom-vib.png', qrWidth: 1170, qrHeight: 1638 },
+    { role: 'Cô dâu', name: 'VO THI HONG', bank: 'ACB', account: '35855837', qr: '/qr/bride-acb.png', qrWidth: 1179, qrHeight: 1576 },
   ],
 };
